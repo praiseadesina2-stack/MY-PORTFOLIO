@@ -136,31 +136,32 @@ const allProjects = [
         link: 'https://mynotequest.com',
         linkText: 'Live Demo →'
     },
+
     {
         title: 'Flip Card Memory Game',
         description: 'Interactive Memory game with clean UI and smooth gameplay mechanics.',
-        image: '../Memory Game/Screenshot 2026-02-02 030151.png',
+        image: 'https://api.microlink.io/?url=https://praise-flip.vercel.app&screenshot=true&meta=false&embed=screenshot.url',
         tags: ['HTML', 'CSS', 'JavaScript'],
         category: 'frontend',
-        link: '../Memory Game/flip-game.html',
+        link: 'https://praise-flip.vercel.app',
         linkText: 'View Project →'
     },
     {
         title: 'Lost & Found System',
         description: 'Web application allowing users to upload found items and search for lost belongings with advanced filtering.',
-        image: '../campussecure/Screenshot 2026-01-31 220906.png',
+        image: 'https://api.microlink.io/?url=https://campussecure.vercel.app&screenshot=true&meta=false&embed=screenshot.url',
         tags: ['React', 'Node.js', 'PostgreSQL'],
         category: 'fullstack',
-        link: '../campussecure/Campussecure.html',
-        linkText: 'Coming soon! →'
+        link: 'https://campussecure.vercel.app',
+        linkText: 'View Demo! →'
     },
     {
         title: 'Blog Platform',
         description: 'A clean blog for information dissemination and tech updates with MDX support and syntax highlighting.',
-        image: '../BLOG/Screenshot 2026-01-31 224431.png',
+        image: 'https://api.microlink.io/?url=https://praise-blog-website.vercel.app&screenshot=true&meta=false&embed=screenshot.url',
         tags: ['HTML', 'CSS', 'JavaScript'],
         category: 'web',
-        link: '../BLOG/blog.html',
+        link: 'https://praise-blog-website.vercel.app',
         linkText: 'View Project →'
     },
     {
@@ -181,15 +182,15 @@ const allProjects = [
         link: 'https://praiseadesina-portfolio.netlify.app',
         linkText: 'Live Demo →'
     },
-    {
-        title: 'Tic-Tac-Toe',
-        description: 'Interactive Tic-Tac-Toe game with clean UI and smooth gameplay mechanics.',
-        image: '../TICTACTOE/Screenshot 2026-01-31 223548.png',
-        tags: ['HTML', 'CSS', 'JavaScript'],
-        category: 'frontend',
-        link: '../TICTACTOE/tic-tac-toe.html',
-        linkText: 'View Project →'
-    }
+    // {
+    //     title: 'Tic-Tac-Toe',
+    //     description: 'Interactive Tic-Tac-Toe game with clean UI and smooth gameplay mechanics.',
+    //     image: '../TICTACTOE/Screenshot 2026-01-31 223548.png',
+    //     tags: ['HTML', 'CSS', 'JavaScript'],
+    //     category: 'frontend',
+    //     link: '../TICTACTOE/tic-tac-toe.html',
+    //     linkText: 'View Project →'
+    // }
 ];
 
 let displayedProjects = 9;
@@ -288,7 +289,9 @@ function getBotResponse(question) {
         return knowledgeBase.technologies;
     } else if (q.includes('goal') || q.includes('future') || q.includes('aim')) {
         return knowledgeBase.goals;
-    } else {
+    } else 
+        
+        {
         return knowledgeBase.default;
     }
 }
@@ -404,32 +407,164 @@ function highlightNavigation() {
 }
 
 window.addEventListener('scroll', highlightNavigation);
+// ============================================
+// EMAILJS CONFIGURATION
+// ============================================
+const EMAILJS_PUBLIC_KEY = 'YGqUVfHKvv3okl2Bu';
+const EMAILJS_SERVICE_ID = 'service_y0oy1e8';
+const EMAILJS_TEMPLATE_ID = 'template_gk9genb';
+
+// Initialize EmailJS
+emailjs.init(EMAILJS_PUBLIC_KEY);
 
 // ============================================
-// CONTACT FORM HANDLING
+// CONFETTI FUNCTION (Simple & Beautiful)
+// ============================================
+function launchConfetti() {
+    // Using canvas-confetti via CDN (lightweight)
+    const confettiScript = document.createElement('script');
+    confettiScript.src = 'https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js';
+    confettiScript.onload = () => {
+        confetti({
+            particleCount: 150,
+            spread: 70,
+            origin: { y: 0.6 }
+        });
+
+        // Second burst for more celebration
+        setTimeout(() => {
+            confetti({
+                particleCount: 100,
+                angle: 60,
+                spread: 55,
+                origin: { x: 0.1 }
+            });
+        }, 250);
+
+        setTimeout(() => {
+            confetti({
+                particleCount: 100,
+                angle: 120,
+                spread: 55,
+                origin: { x: 0.9 }
+            });
+        }, 400);
+    };
+    document.head.appendChild(confettiScript);
+}
+
+// ============================================
+// CONTACT FORM WITH EMAILJS + CONFETTI
 // ============================================
 const contactForm = document.getElementById('contactForm');
 
 if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
+    contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
-        const formData = new FormData(contactForm);
-        const name = formData.get('name');
-        const email = formData.get('email');
-        const message = formData.get('message');
-        
-        const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
-        const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
-        const mailtoLink = `mailto:praiseadesina2@gmail.com?subject=${subject}&body=${body}`;
-        
-        window.location.href = mailtoLink;
-        
-        alert('Thank you for your message! Your email client will open to send the message.');
-        contactForm.reset();
+
+        const submitBtn = contactForm.querySelector('button[type="submit"]');
+        const originalBtnText = submitBtn.innerHTML;
+
+        // Show loading state
+        submitBtn.innerHTML = `
+            <span>Sending...</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="spin">
+                <path d="M12 4V2m0 20v-2M4 12H2m20 0h-2" stroke="currentColor" stroke-width="2"/>
+                <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+            </svg>
+        `;
+        submitBtn.disabled = true;
+
+        try {
+            const formData = new FormData(contactForm);
+            
+            const templateParams = {
+                from_name: formData.get('name'),
+                from_email: formData.get('email'),
+                message: formData.get('message'),
+                to_name: "Praise Adesina"   // Optional: shows in your email
+            };
+
+            await emailjs.send(
+                EMAILJS_SERVICE_ID,
+                EMAILJS_TEMPLATE_ID,
+                templateParams
+            );
+
+            // Success!
+            launchConfetti();
+
+            // Show success message
+            const successMsg = document.createElement('div');
+            successMsg.className = 'form-feedback success';
+            successMsg.textContent = "✅ Message sent successfully! I'll reply soon.";
+            contactForm.appendChild(successMsg);
+
+            // Reset form
+            contactForm.reset();
+
+            // Remove message after 5 seconds
+            setTimeout(() => {
+                successMsg.remove();
+            }, 5000);
+
+        } catch (error) {
+            console.error('EmailJS Error:', error);
+            
+            const errorMsg = document.createElement('div');
+            errorMsg.className = 'form-feedback error';
+            errorMsg.textContent = "❌ Failed to send. Please try again or email me directly.";
+            contactForm.appendChild(errorMsg);
+
+            setTimeout(() => errorMsg.remove(), 4000);
+        } finally {
+            // Restore button
+            submitBtn.innerHTML = originalBtnText;
+            submitBtn.disabled = false;
+        }
     });
 }
+// ============================================
+// EMAIL COPY WITH ICON FEEDBACK + CONFETTI
+// ============================================
+function copyEmail() {
+    const email = "praiseadesina2@gmail.com";
+    const btn = document.getElementById('emailCopyBtn');
+    
+    navigator.clipboard.writeText(email).then(() => {
+        // Launch confetti
+        launchConfetti();
 
+        // Visual feedback on button
+        btn.classList.add('copied');
+        
+        // Optional: Temporarily show "Copied!" text
+        const originalHTML = btn.innerHTML;
+        btn.innerHTML = `
+            <span class="email-text">praiseadesina2@gmail.com</span>
+            <span class="copy-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 8H10C8.89543 8 8 8.89543 8 10V20C8 21.1046 8.89543 22 10 22H20C21.1046 22 22 21.1046 22 20V10C22 8.89543 21.1046 8 20 8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M4 16H14C15.1046 16 16 15.1046 16 14V4C16 2.89543 15.1046 2 14 2H4C2.89543 2 2 2.89543 2 4V14C2 15.1046 2.89543 16 4 16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+            <span style="margin-left: auto; font-size: 0.85rem; color: #22c55e;">Copied ✓</span>
+        `;
+
+        // Reset button after 2.5 seconds
+        setTimeout(() => {
+            btn.classList.remove('copied');
+            btn.innerHTML = originalHTML;
+        }, 2500);
+
+        // Optional toast (if you want extra feedback)
+        // showToast("✅ Email copied!");
+
+    }).catch(err => {
+        console.error('Copy failed:', err);
+        alert("Failed to copy email. Please copy it manually.");
+    });
+}
 // ============================================
 // CHAT FUNCTIONALITY
 // ============================================
