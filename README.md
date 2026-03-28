@@ -2,9 +2,9 @@
 
 **Computer Science Student | Product Developer | Aspiring Tech Mogul**
 
-I'm a passionate builder studying **Computer Science at Covenant University** (Class of 2028, First Class Honors). I love creating clean, scalable, and delightful digital experiences that solve real problems and help people thrive.
+I'm a passionate builder studying **Computer Science at Covenant University** (Class of 2028). I love creating clean, scalable, and delightful digital experiences that solve real problems and help people thrive.
 
-Currently, I'm building impactful products as a **Product Developer at MyNoteQuest**, where I lead development from ideation to execution — turning user feedback into polished features and AI-powered learning tools.
+Currently, I'm building impactful products as a **Product Developer at MyNoteQuest**, where I help with development from ideation to execution — turning user feedback into polished features and AI-powered learning tools.
 
 ---
 
@@ -41,7 +41,7 @@ MyNoteQuest, Nigeria
 
 **B.Sc. Computer Science**  
 Covenant University  
-*2024 – 2028* (First Class Honors)
+*2024 – 2028* 
 
 **Professional Certificate in Web Development**  
 SQI College of ICT  
@@ -75,4 +75,4 @@ I'm always open to new opportunities, collaborations, or just a good conversatio
 
 ---
 
-*Made with ❤️ and lots of coffee in Ibadan, Nigeria*
+*Made with ❤️ and lots of coffee from Ogbomoso, Nigeria*
