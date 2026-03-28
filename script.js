@@ -407,54 +407,40 @@ function highlightNavigation() {
 }
 
 window.addEventListener('scroll', highlightNavigation);
+
 // ============================================
-// EMAILJS CONFIGURATION
+// EMAILJS + IMPROVED LOADING STATE + CONFETTI
 // ============================================
 const EMAILJS_PUBLIC_KEY = 'YGqUVfHKvv3okl2Bu';
 const EMAILJS_SERVICE_ID = 'service_y0oy1e8';
 const EMAILJS_TEMPLATE_ID = 'template_gk9genb';
 
-// Initialize EmailJS
 emailjs.init(EMAILJS_PUBLIC_KEY);
 
-// ============================================
-// CONFETTI FUNCTION (Simple & Beautiful)
-// ============================================
 function launchConfetti() {
-    // Using canvas-confetti via CDN (lightweight)
-    const confettiScript = document.createElement('script');
-    confettiScript.src = 'https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js';
-    confettiScript.onload = () => {
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js';
+    script.onload = () => {
         confetti({
-            particleCount: 150,
-            spread: 70,
+            particleCount: 180,
+            spread: 80,
             origin: { y: 0.6 }
         });
-
-        // Second burst for more celebration
+        
         setTimeout(() => {
             confetti({
-                particleCount: 100,
+                particleCount: 120,
                 angle: 60,
                 spread: 55,
-                origin: { x: 0.1 }
+                origin: { x: 0.1, y: 0.7 }
             });
-        }, 250);
-
-        setTimeout(() => {
-            confetti({
-                particleCount: 100,
-                angle: 120,
-                spread: 55,
-                origin: { x: 0.9 }
-            });
-        }, 400);
+        }, 200);
     };
-    document.head.appendChild(confettiScript);
+    document.head.appendChild(script);
 }
 
 // ============================================
-// CONTACT FORM WITH EMAILJS + CONFETTI
+// CONTACT FORM WITH BETTER LOADING
 // ============================================
 const contactForm = document.getElementById('contactForm');
 
@@ -463,26 +449,24 @@ if (contactForm) {
         e.preventDefault();
 
         const submitBtn = contactForm.querySelector('button[type="submit"]');
-        const originalBtnText = submitBtn.innerHTML;
+        const originalBtnHTML = submitBtn.innerHTML;
 
-        // Show loading state
+        // Better loading state
         submitBtn.innerHTML = `
-            <span>Sending...</span>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="spin">
-                <path d="M12 4V2m0 20v-2M4 12H2m20 0h-2" stroke="currentColor" stroke-width="2"/>
-                <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
-            </svg>
+            <span class="sending-text">Sending Message</span>
+            <span class="loading-spinner"></span>
         `;
         submitBtn.disabled = true;
+        submitBtn.style.opacity = "0.85";
 
         try {
             const formData = new FormData(contactForm);
-            
+
             const templateParams = {
                 from_name: formData.get('name'),
                 from_email: formData.get('email'),
                 message: formData.get('message'),
-                to_name: "Praise Adesina"   // Optional: shows in your email
+                to_name: "Praise Adesina"
             };
 
             await emailjs.send(
@@ -491,36 +475,41 @@ if (contactForm) {
                 templateParams
             );
 
-            // Success!
+            // Success
             launchConfetti();
 
-            // Show success message
-            const successMsg = document.createElement('div');
-            successMsg.className = 'form-feedback success';
-            successMsg.textContent = "✅ Message sent successfully! I'll reply soon.";
-            contactForm.appendChild(successMsg);
+            // Success feedback
+            const successDiv = document.createElement('div');
+            successDiv.className = 'form-feedback success';
+            successDiv.innerHTML = `
+                ✅ Message sent successfully!<br>
+                <small>I'll get back to you as soon as possible.</small>
+            `;
+            contactForm.appendChild(successDiv);
 
-            // Reset form
             contactForm.reset();
 
-            // Remove message after 5 seconds
+            // Auto remove success message
             setTimeout(() => {
-                successMsg.remove();
-            }, 5000);
+                if (successDiv.parentNode) successDiv.remove();
+            }, 6000);
 
         } catch (error) {
             console.error('EmailJS Error:', error);
-            
-            const errorMsg = document.createElement('div');
-            errorMsg.className = 'form-feedback error';
-            errorMsg.textContent = "❌ Failed to send. Please try again or email me directly.";
-            contactForm.appendChild(errorMsg);
 
-            setTimeout(() => errorMsg.remove(), 4000);
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'form-feedback error';
+            errorDiv.textContent = "❌ Something went wrong. Please try again or email me directly.";
+            contactForm.appendChild(errorDiv);
+
+            setTimeout(() => {
+                if (errorDiv.parentNode) errorDiv.remove();
+            }, 5000);
         } finally {
             // Restore button
-            submitBtn.innerHTML = originalBtnText;
+            submitBtn.innerHTML = originalBtnHTML;
             submitBtn.disabled = false;
+            submitBtn.style.opacity = "1";
         }
     });
 }
