@@ -23,7 +23,7 @@ I enjoy turning complex ideas into simple, beautiful interfaces and full-stack a
 
 - **[MyNoteQuest](https://mynotequest.com)** — AI-powered study platform that transforms heavy PDFs into cinematic anime-style explainers with competitive study battles.
 - **[CampusSecure (Lost & Found System)](https://campussecure.vercel.app)** — Full-stack web app for reporting and reclaiming lost items on campus.
-- **[Personal Portfolio](https://praiseadesina-portfolio.netlify.app)** — This very site! Built with modern animations, particle background, interactive chat, and EmailJS.
+- **[Personal Portfolio](https://praiseadesina.vercel.app)** — This very site! Built with modern animations, particle background, interactive chat, and EmailJS.
 - **Flip Card Memory Game** & **Blog Platform** — Clean, interactive frontend experiences.
 
 Check out more of my work in the [Projects section](#) of my portfolio.
