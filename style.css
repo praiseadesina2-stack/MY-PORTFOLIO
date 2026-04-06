@@ -55,49 +55,6 @@
     --gradient-1: linear-gradient(135deg, #50a6ec 0%, #339af0 100%);
     --gradient-2: linear-gradient(135deg, rgba(80, 166, 236, 0.15) 0%, rgba(51, 154, 240, 0.05) 100%);
 }
-/* Loading Spinner */
-.loading-spinner {
-    display: inline-block;
-    width: 18px;
-    height: 18px;
-    border: 2.5px solid rgba(255, 255, 255, 0.3);
-    border-top-color: #ffffff;
-    border-radius: 50%;
-    animation: spin 0.9s linear infinite;
-    vertical-align: middle;
-    margin-left: 8px;
-}
-
-.sending-text {
-    vertical-align: middle;
-}
-
-/* Form Feedback Styling */
-.form-feedback {
-    padding: 1rem 1.25rem;
-    border-radius: 10px;
-    font-size: 0.95rem;
-    margin-top: 1rem;
-    text-align: center;
-    border: 1px solid;
-}
-
-.form-feedback.success {
-    background: rgba(34, 197, 94, 0.12);
-    color: #22c55e;
-    border-color: rgba(34, 197, 94, 0.4);
-}
-
-.form-feedback.error {
-    background: rgba(239, 68, 68, 0.1);
-    color: #ef4444;
-    border-color: rgba(239, 68, 68, 0.4);
-}
-
-/* Spinner Animation */
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
 /* Email Copy Button */
 .email-copy-wrapper {
     margin-top: 0.5rem;
