@@ -136,6 +136,15 @@ const allProjects = [
         link: 'https://mynotequest.com',
         linkText: 'Live Demo →'
     },
+     {
+        title: 'Webphinix',
+        description: 'Webphinix builds professional, conversion-focused websites for small businesses, startups, and freelancers who are serious about their online presence.',
+        image: 'https://api.microlink.io/?url=https://webphinix.vercel.app&screenshot=true&meta=false&embed=screenshot.url',
+        tags: ['React', 'Node.js', 'JavaScript'],
+        category: 'fullstack',
+        link: 'https://webphinix.vercel.app',
+        linkText: 'Live Demo →'
+    },
 
     {
         title: 'Flip Card Memory Game',
