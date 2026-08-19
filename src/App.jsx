@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTheme } from './ThemeContext';
 import ParticleCanvas from './ParticleCanvas';
 import Chat from './Chat';
@@ -116,6 +116,13 @@ const App = () => {
   const { theme, toggleTheme } = useTheme();
   const [activeFilter, setActiveFilter] = useState('all');
 
+  useEffect(() => {
+    // Ensure the website always opens at the top Hero landing page when loaded
+    if (!window.location.hash) {
+      window.scrollTo(0, 0);
+    }
+  }, []);
+
   const filteredProjects = activeFilter === 'all' 
     ? projectsData 
     : projectsData.filter(p => p.category === activeFilter);
@@ -132,8 +139,7 @@ const App = () => {
         borderBottom: '1px solid var(--border-color)' 
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-          <div style={{ fontWeight: 800, letterSpacing: '-0.03em', fontSize: '1.35rem' }} className="gradient-text">PA.</div>
-        
+          <a href="#hero" style={{ fontWeight: 800, letterSpacing: '-0.03em', fontSize: '1.35rem', textDecoration: 'none' }} className="gradient-text">PA.</a>
         </div>
 
         <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
@@ -155,7 +161,7 @@ const App = () => {
       <main className="container" style={{ paddingTop: '6.5rem', paddingBottom: '6rem' }}>
         
         {/* Hero Section */}
-        <section style={{ 
+        <section id="hero" style={{ 
           minHeight: 'calc(85vh - 5rem)', 
           display: 'flex', 
           alignItems: 'center', 

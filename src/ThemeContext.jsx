@@ -4,9 +4,9 @@ const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(() => {
-    // Default to 'dark' mode on initial page load
+    // Default to 'light' mode on initial page load
     const savedTheme = localStorage.getItem('theme');
-    return savedTheme || 'dark';
+    return savedTheme || 'light';
   });
 
   useEffect(() => {
