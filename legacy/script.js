@@ -128,8 +128,44 @@ class ParticleSystem {
 // ============================================
 const allProjects = [
      {
+        title: 'Afrizend',
+        description: 'Pan-African freelance marketplace using Kora API with virtual wallets and dynamic currency conversion.',
+        image: 'https://api.microlink.io/?url=https://afrizend.vercel.app&screenshot=true&meta=false&embed=screenshot.url',
+        tags: ['Next.js', 'TypeScript', 'Prisma', 'Kora API'],
+        category: 'fullstack',
+        link: 'https://afrizend.vercel.app',
+        linkText: 'Live Demo →'
+    },
+     {
+        title: 'Paylance',
+        description: 'Trust-first payment platform for freelancers using Interledger Protocol escrow and AI milestone verification.',
+        image: 'https://api.microlink.io/?url=https://github.com/praiseadesina2-stack/Paylance&screenshot=true&meta=false&embed=screenshot.url',
+        tags: ['React', 'Node.js', 'ILP SDK'],
+        category: 'fullstack',
+        link: '#',
+        linkText: 'View Project →'
+    },
+     {
+        title: 'OyaSpray',
+        description: 'Real-time digital money-spraying platform on the Interledger Testnet with cross-ledger micropayments.',
+        image: 'https://api.microlink.io/?url=https://github.com/praiseadesina2-stack/OyaSpray&screenshot=true&meta=false&embed=screenshot.url',
+        tags: ['Node.js', 'Socket.io', 'ILP SDK'],
+        category: 'fullstack',
+        link: '#',
+        linkText: 'View Project →'
+    },
+    {
+        title: 'CampusSecure',
+        description: 'End-to-end lost-and-found platform with JWT auth, AI-powered item description (Gemini), and real-time notifications.',
+        image: 'https://api.microlink.io/?url=https://campussecure.vercel.app&screenshot=true&meta=false&embed=screenshot.url',
+        tags: ['React', 'PostgreSQL', 'Prisma'],
+        category: 'fullstack',
+        link: 'https://campussecure.vercel.app',
+        linkText: 'Live Demo →'
+    },
+     {
         title: 'MyNoteQuest',
-        description: 'Transform heavy PDFs into Cinematic Anime Explainers and competitive AI-powered study battles. Master your notes, earn ranks, and join the elites.',
+        description: 'Transform heavy PDFs into Cinematic Anime Explainers and competitive AI-powered study battles.',
         image: 'https://api.microlink.io/?url=https://mynotequest.com&screenshot=true&meta=false&embed=screenshot.url',
         tags: ['React', 'Firebase', 'Gemini 3'],
         category: 'fullstack',
@@ -138,31 +174,12 @@ const allProjects = [
     },
      {
         title: 'Webphinix',
-        description: 'Webphinix builds professional, conversion-focused websites for small businesses, startups, and freelancers who are serious about their online presence.',
+        description: 'Webphinix builds professional, conversion-focused websites for small businesses, startups, and freelancers.',
         image: 'https://api.microlink.io/?url=https://webphinix.vercel.app&screenshot=true&meta=false&embed=screenshot.url',
         tags: ['React', 'Node.js', 'JavaScript'],
         category: 'fullstack',
         link: 'https://webphinix.vercel.app',
         linkText: 'Live Demo →'
-    },
-
-    {
-        title: 'Flip Card Memory Game',
-        description: 'Interactive Memory game with clean UI and smooth gameplay mechanics.',
-        image: 'https://api.microlink.io/?url=https://praise-flip.vercel.app&screenshot=true&meta=false&embed=screenshot.url',
-        tags: ['HTML', 'CSS', 'JavaScript'],
-        category: 'frontend',
-        link: 'https://praise-flip.vercel.app',
-        linkText: 'View Project →'
-    },
-    {
-        title: 'Lost & Found System',
-        description: 'Web application allowing users to upload found items and search for lost belongings with advanced filtering.',
-        image: 'https://api.microlink.io/?url=https://campussecure.vercel.app&screenshot=true&meta=false&embed=screenshot.url',
-        tags: ['React', 'Node.js', 'PostgreSQL'],
-        category: 'fullstack',
-        link: 'https://campussecure.vercel.app',
-        linkText: 'View Demo! →'
     },
     {
         title: 'Blog Platform',
@@ -260,23 +277,23 @@ function filterProjects(category) {
 // CHATBOT SYSTEM
 // ============================================
 const knowledgeBase = {
-    skills: "I work with HTML, CSS, JavaScript, React, Node.js, PostgreSQL, C, C++, Firebase, Claude AI, and Gemini 3. I'm proficient in both frontend and backend development.",
+    skills: "I work with TypeScript, Next.js, React, Node.js, PostgreSQL, Prisma, Interledger SDK, Kora API, and more. I'm proficient in full-stack web and product development.",
     
-    projects: "I've built MyNoteQuest (an AI-powered study platform), a Lost & Found System, multiple portfolio websites, a Blog Platform, and various web applications. My favorite is MyNoteQuest - it transforms PDFs into anime-style explainers!",
+    projects: "I've built Afrizend (a freelance marketplace), Paylance (an ILP-based escrow platform), OyaSpray, CampusSecure, and MyNoteQuest. My focus is on fintech, edtech, and impactful digital products!",
     
-    education: "I'm currently studying Computer Science at Covenant University (2024-2028) with First Class Honors. I also completed a Professional Certificate in Web Development from SQI College of ICT with Distinction.",
+    education: "I'm studying Computer Science at Covenant University (2024-2028) with First Class Honours. I'm also active as a Course Representative and Academic Tutor.",
     
-    experience: "I'm currently a Product Developer at MyNoteQuest since December 2025. I lead product development from ideation to execution using design thinking processes.",
+    experience: "I'm a Trainee at the Interledger Foundation, Full-Stack Intern at Codveda Technologies, Technical Lead at IGP Foundation, and Product Developer at NoteQuest.",
     
     hobbies: "I love playing football and gaming! Beyond that, I enjoy teaching and writing about tech. I'm passionate about turning complex ideas into simple, beautiful experiences.",
     
     contact: "You can reach me at praiseadesina2@gmail.com or connect with me on LinkedIn, Twitter, Instagram, or WhatsApp. I'm always open to discussing new projects and opportunities!",
     
-    technologies: "My tech stack includes modern web technologies like React for frontend, Node.js for backend, PostgreSQL for databases, and I work with AI APIs like Claude and Gemini. I also use Firebase for real-time applications.",
+    technologies: "My tech stack includes React, Next.js, TypeScript, Node.js, Express, PostgreSQL, Prisma, Kora API, and the Interledger Open Payments SDK.",
     
     goals: "My goal is to create products that scale and truly help people. I'm focused on building impactful digital products that solve real problems and improve lives.",
     
-    default: "That's a great question! I'm Praise Adesina, a passionate Computer Science student at Covenant University. I build clean, scalable web experiences and I'm particularly interested in AI-powered applications. Feel free to ask me about my skills, projects, education, or interests!"
+    default: "That's a great question! I'm Praise Adesina, a passionate Computer Science student at Covenant University. I build clean, scalable web experiences and I'm particularly interested in fintech and edtech applications. Feel free to ask me about my skills, projects, education, or interests!"
 };
 
 function getBotResponse(question) {

@@ -1,78 +1,16 @@
-# Hi, I'm Praise Adesina 👋
+# React + Vite
 
-**Computer Science Student | Product Developer | Aspiring Tech Mogul**
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-I'm a passionate builder studying **Computer Science at Covenant University** (Class of 2028). I love creating clean, scalable, and delightful digital experiences that solve real problems and help people thrive.
+Currently, two official plugins are available:
 
-Currently, I'm building impactful products as a **Product Developer at MyNoteQuest**, where I help with development from ideation to execution — turning user feedback into polished features and AI-powered learning tools.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
----
+## React Compiler
 
-### 🛠️ What I Build With
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-- **Frontend**: HTML, CSS, JavaScript, React
-- **Backend**: Node.js, Express
-- **Database**: PostgreSQL, Firebase
-- **Tools & Others**: Git, Design Thinking, Claude AI, Gemini 3
+## Expanding the ESLint configuration
 
-I enjoy turning complex ideas into simple, beautiful interfaces and full-stack applications.
-
----
-
-### 🚀 Featured Projects
-
-- **[MyNoteQuest](https://mynotequest.com)** — AI-powered study platform that transforms heavy PDFs into cinematic anime-style explainers with competitive study battles.
-- **[CampusSecure (Lost & Found System)](https://campussecure.vercel.app)** — Full-stack web app for reporting and reclaiming lost items on campus.
-- **[Personal Portfolio](https://praiseadesina.vercel.app)** — This very site! Built with modern animations, particle background, interactive chat, and EmailJS.
-- **Flip Card Memory Game** & **Blog Platform** — Clean, interactive frontend experiences.
-
-Check out more of my work in the [Projects section](#) of my portfolio.
-
----
-
-### 💼 Experience
-
-**Product Developer**  
-MyNoteQuest, Nigeria  
-*Dec 2025 – Present*  
-- Leading product development using design thinking  
-- Gathering and implementing user feedback from beta users  
-- Building features that improve learning experience with AI
-
-**B.Sc. Computer Science**  
-Covenant University  
-*2024 – 2028* 
-
-**Professional Certificate in Web Development**  
-SQI College of ICT  
-*2021 – 2023* (With Distinction)
-
----
-
-### 🌟 Beyond Code
-
-When I'm not coding, you'll find me:
-- Playing football ⚽
-- Gaming 🎮
-- Teaching and writing about technology
-- Exploring new ways to make complex ideas feel simple and beautiful
-
----
-
-### 📫 Let's Connect
-
-- **Email**: [praiseadesina2@gmail.com](mailto:praiseadesina2@gmail.com)
-- **Twitter / X**: [@praiseadesina](https://x.com/praiseadesina)
-- **LinkedIn**: [Praise Adesina](https://www.linkedin.com/in/praise-adesina-bb5905248)
-- **Instagram**: [@globalpraisekinging](https://www.instagram.com/globalpraisekinging/)
-- **WhatsApp**: [+234 704 350 3721](https://wa.me/2347043503721)
-
-I'm always open to new opportunities, collaborations, or just a good conversation about tech and product development.
-
----
-
-**Thanks for stopping by!** Feel free to explore the live portfolio and reach out if you'd like to work together.
-
----
-
-*Made with ❤️ and lots of coffee from Ogbomoso, Nigeria*
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
