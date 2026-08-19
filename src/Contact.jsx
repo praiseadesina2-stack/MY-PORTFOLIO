@@ -59,15 +59,13 @@ const Contact = () => {
                         <Mail size={18} style={{ color: 'var(--accent-primary)' }} />
                         <span>praiseadesina2@gmail.com</span>
                     </div>
-                </div>
-
-                <div style={{ marginBottom: '2rem' }}>
+                </div>                <div style={{ marginBottom: '2rem' }}>
                     <div style={{ fontSize: '0.8125rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.5rem', fontWeight: 600 }}>Quick Email Copy</div>
                     <button 
                         onClick={handleCopy}
                         style={{ 
-                            background: 'var(--bg-secondary)', border: `1px solid ${copied ? '#22c55e' : 'var(--border-color)'}`, 
-                            color: copied ? '#22c55e' : 'var(--text-primary)', padding: '0.85rem 1.25rem', borderRadius: '0.75rem', 
+                            background: 'var(--bg-secondary)', border: `1px solid ${copied ? 'var(--accent-primary)' : 'var(--border-color)'}`, 
+                            color: copied ? 'var(--accent-primary)' : 'var(--text-primary)', padding: '0.85rem 1.25rem', borderRadius: '0.75rem', 
                             display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', cursor: 'pointer',
                             fontSize: '0.95rem', fontFamily: 'monospace', transition: 'all 0.2s'
                         }}
@@ -104,7 +102,7 @@ const Contact = () => {
                                     transition: 'all 0.2s',
                                     display: 'flex',
                                     alignItems: 'center',
-                                    justifyContent: 'center'
+                                    justify: 'center'
                                 }}
                                 className="social-link"
                             >
@@ -129,7 +127,16 @@ const Contact = () => {
                 </button>
 
                 {feedback && (
-                    <div style={{ padding: '0.85rem 1rem', borderRadius: '0.75rem', background: feedback.type === 'success' ? 'rgba(34, 197, 94, 0.12)' : 'rgba(239, 68, 68, 0.12)', color: feedback.type === 'success' ? '#22c55e' : '#ef4444', textAlign: 'center', fontSize: '0.9rem', fontWeight: 500 }}>
+                    <div style={{ 
+                        padding: '0.85rem 1rem', 
+                        borderRadius: '0.75rem', 
+                        background: feedback.type === 'success' ? 'var(--accent-glow)' : 'rgba(239, 68, 68, 0.12)', 
+                        border: `1px solid ${feedback.type === 'success' ? 'var(--accent-primary)' : 'rgba(239, 68, 68, 0.3)'}`,
+                        color: feedback.type === 'success' ? 'var(--accent-primary)' : '#ef4444', 
+                        textAlign: 'center', 
+                        fontSize: '0.9rem', 
+                        fontWeight: 600 
+                    }}>
                         {feedback.text}
                     </div>
                 )}

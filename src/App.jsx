@@ -73,12 +73,12 @@ const projectsData = [
   {
     id: 7,
     title: 'Flip Card Memory Game',
-    subtitle: 'Interactive Web Game',
+    subtitle: 'praise-flip.vercel.appe',
     desc: 'Interactive Memory game with clean UI, dynamic scoring, and smooth gameplay mechanics.',
-    link: '#',
+    link: 'https://praise-flip.vercel.app',
     tags: ['HTML', 'CSS', 'JavaScript'],
     category: 'web',
-    img: 'https://images.unsplash.com/photo-1611996575749-79a3a250f948?w=600&auto=format&fit=crop'
+    img: 'flipgame.png'
   },
   {
     id: 8,
@@ -92,13 +92,13 @@ const projectsData = [
   },
   {
     id: 9,
-    title: 'Book Catalogue',
-    subtitle: 'Digital Library System',
-    desc: 'Digital library system for cataloging and managing book collections with fast search and tag filtering.',
-    link: '#',
-    tags: ['React', 'PostgreSQL'],
+    title: 'COUCHD CINEMA',
+    subtitle: 'couch-hd.vercel.app',
+    desc: 'A movie trailer web app that fetchs the trailer of any movie, check here before you dedicate time to watch that movie/series. Built with react and the TMDB API.',
+    link: 'https://couch-hd.vercel.app/',
+    tags: ['React', 'TMDB API'],
     category: 'fullstack',
-    img: 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=600&auto=format&fit=crop'
+    img: 'https://api.microlink.io/?url=https://couch-hd.vercel.app&screenshot=true&meta=false&embed=screenshot.url'
   },
   {
     id: 10,
