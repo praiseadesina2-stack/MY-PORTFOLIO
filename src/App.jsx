@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useTheme } from './ThemeContext';
-import ParticleCanvas from './ParticleCanvas';
 import Chat from './Chat';
 import Contact from './Contact';
 import { 
-  Moon, Sun, ExternalLink, Trophy, Award, Briefcase, 
-  GraduationCap, Code2, Sparkles, MapPin, HeartHandshake, 
-  Users, Eye, TrendingUp, Search, ArrowRight
+  ExternalLink, Trophy, Award, Briefcase, 
+  GraduationCap, Code2, Sparkles, MapPin, 
+  Users, Search, ArrowRight, ChevronRight, Menu, X
 } from 'lucide-react';
 
 const projectsData = [
@@ -14,7 +12,7 @@ const projectsData = [
     id: 1,
     title: 'Afrizend',
     subtitle: 'afrizend.vercel.app',
-    desc: 'Pan-African freelance marketplace on the Kora API with virtual wallets and dynamic currency conversion. 3rd runner-up, Kora Hackathon 2.0.',
+    desc: 'Pan-African freelance marketplace on the Kora API with virtual multi-currency wallets and dynamic FX conversion. Awarded 3rd runner-up at Kora Hackathon 2.0.',
     link: 'https://afrizend.vercel.app',
     tags: ['React', 'Node.js', 'Kora API', 'PostgreSQL'],
     category: 'fintech',
@@ -24,7 +22,7 @@ const projectsData = [
     id: 2,
     title: 'Paylance',
     subtitle: 'paylance-gmc1.onrender.com',
-    desc: 'Cross-border escrow payment platform for freelancers using the Interledger Protocol (ILP) and AI milestone verification. 2nd place, Interledger Hackathon.',
+    desc: 'Cross-border escrow payment platform for global freelancers using the Interledger Protocol (ILP) and AI milestone verification. 2nd place winner, Interledger Hackathon.',
     link: 'https://paylance-gmc1.onrender.com',
     tags: ['React', 'PostgreSQL', 'Node.js', 'ILP SDK'],
     category: 'fintech',
@@ -34,7 +32,7 @@ const projectsData = [
     id: 3,
     title: 'MyNoteQuest',
     subtitle: 'mynotequest.com',
-    desc: 'Transform heavy PDFs into Cinematic Anime Explainers and competitive AI-powered study battles. 1,000+ active beta users.',
+    desc: 'Transforms academic lecture PDFs into interactive anime explainers and competitive AI-powered study battles. Over 1,000 active beta student users.',
     link: 'https://mynotequest.com',
     tags: ['React', 'Firebase', 'Gemini 3', 'EdTech'],
     category: 'edtech',
@@ -44,7 +42,7 @@ const projectsData = [
     id: 4,
     title: 'OyaSpray',
     subtitle: 'oyaspray.vercel.app',
-    desc: 'Digital money-spraying application bringing Nigerian party culture to real-time micropayments via Interledger technology.',
+    desc: 'Digital money-spraying application bringing Nigerian celebratory culture to real-time micropayments via Interledger Open Payments technology.',
     link: 'https://oyaspray.vercel.app',
     tags: ['Node.js', 'JavaScript', 'ILP SDK', 'Socket.io'],
     category: 'fintech',
@@ -54,7 +52,7 @@ const projectsData = [
     id: 5,
     title: 'Webphinix',
     subtitle: 'webphinix.vercel.app',
-    desc: 'Conversion-focused website platform for small businesses, startups, and freelancers serious about online growth.',
+    desc: 'High-conversion business website builder platform engineered for small businesses, startups, and freelancers demanding digital velocity.',
     link: 'https://webphinix.vercel.app',
     tags: ['React', 'Node.js', 'JavaScript'],
     category: 'fullstack',
@@ -64,7 +62,7 @@ const projectsData = [
     id: 6,
     title: 'Lost & Found System',
     subtitle: 'campussecure.vercel.app',
-    desc: 'Web application allowing users to upload found items and search for lost belongings with advanced filtering and JWT auth.',
+    desc: 'Campus security web platform allowing students to register found items and search for lost belongings with token-based JWT authentication.',
     link: 'https://campussecure.vercel.app',
     tags: ['React', 'Node.js', 'PostgreSQL'],
     category: 'fullstack',
@@ -73,20 +71,20 @@ const projectsData = [
   {
     id: 7,
     title: 'Flip Card Memory Game',
-    subtitle: 'praise-flip.vercel.appe',
-    desc: 'Interactive Memory game with clean UI, dynamic scoring, and smooth gameplay mechanics.',
+    subtitle: 'praise-flip.vercel.app',
+    desc: 'Interactive memory and cognition browser game featuring custom card decks, dynamic scoring algorithms, and zero-latency sound effects.',
     link: 'https://praise-flip.vercel.app',
-    tags: ['HTML', 'CSS', 'JavaScript'],
+    tags: ['HTML5', 'CSS3', 'JavaScript'],
     category: 'web',
-    img: 'flipgame.png'
+    img: '/flipgame.png'
   },
   {
     id: 8,
     title: 'Blog Platform',
     subtitle: 'praise-blog-website.vercel.app',
-    desc: 'A clean blog for information dissemination and tech updates with MDX support and code syntax highlighting.',
+    desc: 'Editorial blogging platform for engineering writeups, software architectures, and technical deep-dives with MDX formatting.',
     link: 'https://praise-blog-website.vercel.app',
-    tags: ['HTML', 'CSS', 'JavaScript'],
+    tags: ['HTML5', 'CSS3', 'JavaScript'],
     category: 'web',
     img: 'https://api.microlink.io/?url=https://praise-blog-website.vercel.app&screenshot=true&meta=false&embed=screenshot.url'
   },
@@ -94,9 +92,9 @@ const projectsData = [
     id: 9,
     title: 'COUCHD CINEMA',
     subtitle: 'couch-hd.vercel.app',
-    desc: 'A movie trailer web app that fetchs the trailer of any movie, check here before you dedicate time to watch that movie/series. Built with react and the TMDB API.',
+    desc: 'Cinema discovery platform fetching verified trailers and metadata from the TMDB API before dedicating time to watch films and series.',
     link: 'https://couch-hd.vercel.app/',
-    tags: ['React', 'TMDB API'],
+    tags: ['React', 'TMDB API', 'JavaScript'],
     category: 'fullstack',
     img: 'https://api.microlink.io/?url=https://couch-hd.vercel.app&screenshot=true&meta=false&embed=screenshot.url'
   },
@@ -104,537 +102,1030 @@ const projectsData = [
     id: 10,
     title: 'Portfolio Website',
     subtitle: 'praiseadesina.vercel.app',
-    desc: 'Responsive personal portfolio built with React, Vite, particle background, and AI assistant chatbot.',
+    desc: 'Apple design system implementation built with React and Vite, showcasing responsive full-bleed tiles and AI conversational assistance.',
     link: 'https://praiseadesina.vercel.app',
-    tags: ['React', 'Vite', 'CSS3'],
+    tags: ['React', 'Vite', 'Apple Design System'],
     category: 'web',
-    img: 'https://api.microlink.io/?url=https://praiseadesina.vercel.app&screenshot=true&meta=false&embed=screenshot.url'
+    img: '/profile.png'
   }
 ];
 
+const navItems = [
+  { label: 'Home', href: '#hero', num: '01' },
+  { label: 'Flagship Systems', href: '#flagship', num: '02' },
+  { label: 'Projects', href: '#projects', num: '03' },
+  { label: 'Experience', href: '#experience', num: '04' },
+  { label: 'Academics & Stack', href: '#academics', num: '05' },
+  { label: 'AI Assistant', href: '#chat', num: '06' },
+  { label: 'Contact', href: '#contact', num: '07' }
+];
+
 const App = () => {
-  const { theme, toggleTheme } = useTheme();
   const [activeFilter, setActiveFilter] = useState('all');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadingProgress, setLoadingProgress] = useState(1);
+  const [preloaderExiting, setPreloaderExiting] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [menuClosing, setMenuClosing] = useState(false);
+  const [hoveredNav, setHoveredNav] = useState(null);
+
+  // Typewriter effect: Product Developer -> Frontend Developer -> Backend Developer -> Full Stack Engineer
+  const TYPEWRITER_ROLES = [
+    'Product Developer',
+    'Frontend Developer',
+    'Backend Developer',
+    'Full Stack Engineer'
+  ];
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [currentRoleText, setCurrentRoleText] = useState('');
+  const [isDeletingRole, setIsDeletingRole] = useState(false);
 
   useEffect(() => {
-    // Ensure the website always opens at the top Hero landing page when loaded
+    const targetRole = TYPEWRITER_ROLES[roleIndex];
+    let timer;
+
+    if (!isDeletingRole && currentRoleText === targetRole) {
+      // Finished typing whole phrase - pause for reading
+      timer = setTimeout(() => {
+        setIsDeletingRole(true);
+      }, 1800);
+    } else if (isDeletingRole && currentRoleText === '') {
+      // Finished backspacing - advance to next role
+      setIsDeletingRole(false);
+      setRoleIndex((prev) => (prev + 1) % TYPEWRITER_ROLES.length);
+      timer = setTimeout(() => {}, 350);
+    } else {
+      // In the middle of typing or deleting
+      const speed = isDeletingRole ? 40 : 80;
+      timer = setTimeout(() => {
+        setCurrentRoleText((prev) =>
+          isDeletingRole
+            ? targetRole.substring(0, prev.length - 1)
+            : targetRole.substring(0, prev.length + 1)
+        );
+      }, speed);
+    }
+
+    return () => clearTimeout(timer);
+  }, [currentRoleText, isDeletingRole, roleIndex]);
+
+  useEffect(() => {
     if (!window.location.hash) {
       window.scrollTo(0, 0);
     }
   }, []);
 
-  const filteredProjects = activeFilter === 'all' 
-    ? projectsData 
-    : projectsData.filter(p => p.category === activeFilter);
+  // Preloader count progression from 1 to 100%
+  useEffect(() => {
+    let current = 1;
+    const interval = setInterval(() => {
+      const step = Math.floor(Math.random() * 4) + 2;
+      current += step;
+      if (current >= 100) {
+        current = 100;
+        setLoadingProgress(100);
+        clearInterval(interval);
+        setTimeout(() => {
+          setPreloaderExiting(true);
+          setTimeout(() => {
+            setIsLoading(false);
+          }, 650);
+        }, 350);
+      } else {
+        setLoadingProgress(current);
+      }
+    }, 28);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const filteredProjects = projectsData.filter(proj => {
+    const matchesCategory = activeFilter === 'all' || proj.category === activeFilter;
+    const matchesSearch = searchQuery === '' || 
+      proj.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      proj.desc.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      proj.tags.some(t => t.toLowerCase().includes(searchQuery.toLowerCase()));
+    return matchesCategory && matchesSearch;
+  });
+
+  // Scroll float-in observer for cards
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+          }
+        });
+      },
+      { threshold: 0.08, rootMargin: '0px 0px -20px 0px' }
+    );
+
+    const elements = document.querySelectorAll('.reveal-on-scroll');
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, [isLoading, filteredProjects]);
+
+  const openMenu = () => {
+    setMenuOpen(true);
+    setMenuClosing(false);
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeMenu = () => {
+    setMenuClosing(true);
+    setTimeout(() => {
+      setMenuOpen(false);
+      setMenuClosing(false);
+      document.body.style.overflow = '';
+    }, 260);
+  };
+
+  // Dedicated smooth scroll function with fixed navbar offset
+  const smoothScrollTo = (e, targetHash) => {
+    if (e && e.preventDefault) e.preventDefault();
+    const targetEl = document.querySelector(targetHash);
+    if (targetEl) {
+      const headerOffset = 64;
+      const elementPosition = targetEl.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  const handleMenuLink = (hash) => {
+    closeMenu();
+    setTimeout(() => {
+      smoothScrollTo(null, hash);
+    }, 280);
+  };
 
   return (
-    <div style={{ position: 'relative', minHeight: '100vh', width: '100%' }}>
-      <ParticleCanvas />
-
-      {/* Navigation Bar */}
-      <nav style={{ 
-        position: 'fixed', top: 0, width: '100%', padding: '0.85rem 2rem', 
-        display: 'flex', justifyContent: 'space-between', alignItems: 'center', 
-        zIndex: 50, backdropFilter: 'blur(12px)', background: 'var(--overlay-bg)', 
-        borderBottom: '1px solid var(--border-color)' 
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-          <a href="#hero" style={{ fontWeight: 800, letterSpacing: '-0.03em', fontSize: '1.35rem', textDecoration: 'none' }} className="gradient-text">PA.</a>
-        </div>
-
-        <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
-          <div style={{ display: 'flex', gap: '1.5rem', fontWeight: 500, fontSize: '0.9rem' }} className="nav-links">
-            <a href="#about" style={{ textDecoration: 'none', color: 'var(--text-secondary)' }}>About</a>
-            <a href="#projects" style={{ textDecoration: 'none', color: 'var(--text-secondary)' }}>Projects</a>
-            <a href="#experience" style={{ textDecoration: 'none', color: 'var(--text-secondary)' }}>Experience</a>
-            <a href="#skills" style={{ textDecoration: 'none', color: 'var(--text-secondary)' }}>Skills</a>
-            <a href="#chat" style={{ textDecoration: 'none', color: 'var(--text-secondary)' }}>AI Chat</a>
-            <a href="#contact" style={{ textDecoration: 'none', color: 'var(--text-secondary)' }}>Contact</a>
-          </div>
-          <button onClick={toggleTheme} className="btn" aria-label="Toggle theme" style={{ padding: '0.5rem', borderRadius: '50%' }}>
-            {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
-          </button>
-        </div>
-      </nav>
-
-      {/* Main Container */}
-      <main className="container" style={{ paddingTop: '6.5rem', paddingBottom: '6rem' }}>
-        
-        {/* Hero Section */}
-        <section id="hero" style={{ 
-          minHeight: 'calc(85vh - 5rem)', 
-          display: 'flex', 
-          alignItems: 'center', 
-          justifyContent: 'space-between', 
-          gap: '3rem', 
-          padding: '2rem 0 3rem 0',
-          marginBottom: '5.5rem',
-          flexWrap: 'wrap'
-        }}>
-          <div style={{ flex: '1 1 500px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '1.25rem' }}>
-              <span className="section-label">
-                <MapPin size={13} /> Covenant University • Full-Stack Engineer
-              </span>
+    <div style={{ position: 'relative', width: '100%', minHeight: '100vh', backgroundColor: 'var(--color-canvas)' }}>
+      
+      {/* ====================================================================
+          0. Preloader: Welcome to Praise's Virtual World (1-100%)
+          ==================================================================== */}
+      {isLoading && (
+        <div className={`preloader-overlay ${preloaderExiting ? 'preloader-exit' : ''}`} role="dialog" aria-modal="true">
+          <div className="preloader-content">
+            <div className="preloader-title">
+              Welcome
             </div>
 
-            <h1 style={{ fontSize: 'clamp(2.85rem, 6.5vw, 4.85rem)', fontWeight: 900, lineHeight: 1.05, marginBottom: '1.25rem', letterSpacing: '-0.04em' }}>
-              Praise (Adewale) <br />
-              <span className="gradient-text">Adesina</span>
-            </h1>
-
-            <p style={{ fontSize: '1.15rem', color: 'var(--text-secondary)', maxWidth: '580px', marginBottom: '2rem', lineHeight: '1.6' }}>
-              Building high-converting full-stack web applications, open payment systems, and AI-powered EdTech products that ship to real users.
-            </p>
-
-            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '2.5rem' }}>
-              <a href="#projects" className="btn btn-accent">
-                <span>View Projects</span> <ArrowRight size={16} />
-              </a>
-              <a href="#contact" className="btn">Let's Talk</a>
-              <a href="https://www.linkedin.com/in/praise-adesina-bb5905248" target="_blank" rel="noreferrer" className="btn">
-                <span>LinkedIn</span> <ExternalLink size={14} />
-              </a>
+            <div className="preloader-count">
+              {loadingProgress}%
             </div>
 
-            {/* Quick Stat Badges */}
-            <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-              <div className="badge">🏆 3x Hackathon Placer</div>
-              <div className="badge">🚀 1,000+ Beta Users @ NoteQuest</div>
-              <div className="badge">🇳🇴 Tenkobo Ambassador (Norway)</div>
-              <div className="badge">💼 Codveda Technologies Intern</div>
-            </div>
-          </div>
-
-          {/* Right Side Visual Portrait Card with Original Photo & Custom Backplate */}
-          <div style={{ flex: '1 1 360px', display: 'flex', justifyContent: 'center', position: 'relative' }}>
-            {/* Ambient Background Flare behind photo */}
-            <div style={{
-              position: 'absolute',
-              top: '-15px',
-              left: '-15px',
-              right: '-15px',
-              bottom: '-15px',
-              background: 'radial-gradient(circle, rgba(200, 90, 23, 0.18) 0%, rgba(200, 90, 23, 0) 70%)',
-              borderRadius: '2.5rem',
-              zIndex: 0,
-              pointerEvents: 'none'
-            }} />
-
-            <div style={{ 
-              position: 'relative', 
-              width: '100%', 
-              maxWidth: '400px', 
-              borderRadius: '2rem', 
-              overflow: 'hidden', 
-              border: '1px solid var(--border-color)', 
-              background: 'linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-card) 100%)', 
-              boxShadow: 'var(--shadow-lg)',
-              zIndex: 1
-            }}>
-              <img 
-                src="/profile.png" 
-                alt="Praise Adesina" 
-                style={{ width: '100%', height: 'auto', display: 'block', objectFit: 'cover' }} 
+            <div className="preloader-bar-wrap">
+              <div 
+                className="preloader-bar-fill" 
+                style={{ width: `${loadingProgress}%` }} 
               />
-              <div style={{ 
-                position: 'absolute', 
-                bottom: '1rem', 
-                left: '1rem', 
-                right: '1rem', 
-                padding: '0.85rem 1.25rem', 
-                background: 'var(--overlay-bg)', 
-                backdropFilter: 'blur(14px)', 
-                borderRadius: '1.25rem', 
-                border: '1px solid var(--border-color)',
-                display: 'flex',
-                alignItems: 'center',
-                justify: 'space-between',
-                boxShadow: 'var(--shadow-md)'
-              }}>
-                <div>
-                  <div style={{ fontWeight: 700, fontSize: '0.95rem', color: 'var(--text-primary)' }}>Praise Adesina</div>
-                  <div style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>Full-Stack Software Developer</div>
+            </div>
+
+            <div className="preloader-subtext">
+              Computer Science • Full-Stack Software Engineer
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ====================================================================
+          1. Global Nav (Brand + Nav Links + Get in Touch + Unified Menu Button)
+          ==================================================================== */}
+      <header className="global-nav" role="banner">
+        <div className="global-nav-container">
+          <a 
+            href="#hero" 
+            onClick={(e) => smoothScrollTo(e, '#hero')}
+            className="global-nav-brand"
+            aria-label="Praise Adesina Home"
+          >
+            <span className="nav-brand-dot" />
+            <span>Praise Adesina</span>
+          </a>
+
+          {/* Desktop Navigation Links */}
+          <nav className="global-nav-links" aria-label="Main Navigation">
+            <a 
+              href="#flagship" 
+              onClick={(e) => smoothScrollTo(e, '#flagship')}
+              className="global-nav-link"
+            >
+              Flagship
+            </a>
+            <a 
+              href="#projects" 
+              onClick={(e) => smoothScrollTo(e, '#projects')}
+              className="global-nav-link"
+            >
+              Projects
+            </a>
+            <a 
+              href="#experience" 
+              onClick={(e) => smoothScrollTo(e, '#experience')}
+              className="global-nav-link"
+            >
+              Experience
+            </a>
+            <a 
+              href="#academics" 
+              onClick={(e) => smoothScrollTo(e, '#academics')}
+              className="global-nav-link"
+            >
+              Skills & Stack
+            </a>
+            <a 
+              href="#chat" 
+              onClick={(e) => smoothScrollTo(e, '#chat')}
+              className="global-nav-link"
+            >
+              AI Chat
+            </a>
+          </nav>
+
+          {/* Action Buttons & Unified Menu Toggle */}
+          <div className="global-nav-actions">
+            <a 
+              href="#contact" 
+              onClick={(e) => smoothScrollTo(e, '#contact')}
+              className="btn-primary nav-contact-btn"
+            >
+              Get in Touch
+            </a>
+
+            <button 
+              type="button"
+              onClick={openMenu} 
+              aria-label="Open navigation menu"
+              className="nav-menu-toggle-btn"
+            >
+              <span className="menu-toggle-label">Menu</span>
+              <div className="hamburger-lines">
+                <span />
+                <span />
+              </div>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* ====================================================================
+          Fullscreen Navigation Overlay
+          ==================================================================== */}
+      {menuOpen && (
+        <div className={`fullscreen-menu ${menuClosing ? 'closing' : ''}`} role="dialog" aria-modal="true">
+          <div className="fullscreen-menu-header">
+            <div className="global-nav-container">
+              <a 
+                href="#hero" 
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleMenuLink('#hero');
+                }}
+                className="global-nav-brand"
+              >
+                <span className="nav-brand-dot" />
+                <span>Praise Adesina</span>
+              </a>
+
+              <div className="global-nav-actions">
+                <a 
+                  href="#contact" 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleMenuLink('#contact');
+                  }}
+                  className="btn-primary nav-contact-btn"
+                >
+                  Get in Touch
+                </a>
+
+                <button 
+                  type="button"
+                  onClick={closeMenu} 
+                  aria-label="Close navigation menu"
+                  className="nav-menu-toggle-btn nav-menu-close-btn"
+                >
+                  <span className="menu-toggle-label">Close</span>
+                  <X size={16} color="#ffffff" />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div className="fullscreen-menu-body">
+            <div className="fullscreen-menu-content">
+              <div className="menu-eyebrow">NAVIGATION</div>
+              <nav className="fullscreen-nav-list" onMouseLeave={() => setHoveredNav(null)}>
+                {navItems.map((item, index) => {
+                  const isHovered = hoveredNav === index;
+                  const isAnyHovered = hoveredNav !== null;
+                  return (
+                    <a
+                      key={item.href}
+                      href={item.href}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleMenuLink(item.href);
+                      }}
+                      onMouseEnter={() => setHoveredNav(index)}
+                      className={`fullscreen-nav-item ${isHovered ? 'active' : ''} ${isAnyHovered && !isHovered ? 'dimmed' : ''}`}
+                    >
+                      <span className="nav-item-num">{item.num}</span>
+                      <span className="nav-item-label">{item.label}</span>
+                      <span className="nav-item-arrow">
+                        <ArrowRight size={24} />
+                      </span>
+                    </a>
+                  );
+                })}
+              </nav>
+
+              <div className="fullscreen-menu-footer">
+                <div className="footer-col">
+                  <span className="footer-label">Direct Contact</span>
+                  <a href="mailto:praiseadesina2@gmail.com" className="footer-link">praiseadesina2@gmail.com</a>
                 </div>
-                <span style={{ fontSize: '0.75rem', padding: '0.25rem 0.65rem', background: 'var(--accent-glow)', color: 'var(--accent-primary)', borderRadius: '99px', fontWeight: 600 }}>
-                  Open to Roles
-                </span>
+                <div className="footer-col">
+                  <span className="footer-label">Socials & Networks</span>
+                  <div className="footer-socials">
+                    <a href="https://www.linkedin.com/in/praise-adesina-bb5905248" target="_blank" rel="noreferrer">LinkedIn</a>
+                    <a href="https://github.com/praiseadesina2-stack" target="_blank" rel="noreferrer">GitHub</a>
+                    <a href="https://x.com/praiseadesina" target="_blank" rel="noreferrer">X</a>
+                    <a href="https://wa.me/2347043503721" target="_blank" rel="noreferrer">WhatsApp</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <main>
+        {/* ====================================================================
+            TILE 1: Hero Tile (Split Layout: Text Left, Picture Right Center)
+            ==================================================================== */}
+        <section id="hero" className="tile tile-parchment" style={{ paddingTop: '88px', paddingBottom: '96px' }}>
+          <div className="tile-wide-container">
+            <div className="hero-split-container">
+              {/* Left Column: Opening Text & CTAs */}
+              <div className="hero-text-side">
+                <div style={{ marginBottom: '16px' }}>
+                  <span className="eyebrow" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                    <MapPin size={13} />
+                    Covenant University • CS Student & Builder
+                  </span>
+                </div>
+                
+                <h1 className="hero-display" style={{ marginBottom: '12px' }}>
+                  Praise Adesina.
+                </h1>
+
+                {/* Dynamic Typewriter Role with Blinking Cursor */}
+                <div className="hero-typewriter-box" style={{ marginBottom: '22px' }}>
+                  <span className="typewriter-prefix">I am a </span>
+                  <span className="typewriter-dynamic">{currentRoleText}</span>
+                  <span className="typewriter-cursor" aria-hidden="true" />
+                </div>
+
+                <p className="lead" style={{ maxWidth: '580px', marginBottom: '28px' }}>
+                  Building high-converting full-stack platforms, open financial payment protocols, and AI-driven products for real human scale.
+                </p>
+
+                {/* Two-Button CTA Group */}
+                <div className="cta-group" style={{ justifyContent: 'flex-start', marginBottom: '24px' }}>
+                  <a 
+                    href="#projects" 
+                    onClick={(e) => smoothScrollTo(e, '#projects')}
+                    className="btn-primary"
+                  >
+                    <span>Explore Projects</span>
+                    <ChevronRight size={16} />
+                  </a>
+                  <a 
+                    href="#contact" 
+                    onClick={(e) => smoothScrollTo(e, '#contact')}
+                    className="btn-secondary-pill"
+                  >
+                    Get in Touch
+                  </a>
+                </div>
+
+                <div style={{ marginBottom: '32px' }}>
+                  <a 
+                    href="https://www.linkedin.com/in/praise-adesina-bb5905248" 
+                    target="_blank" 
+                    rel="noreferrer"
+                    className="text-link"
+                  >
+                    <span>Connect on LinkedIn</span>
+                    <ExternalLink size={14} />
+                  </a>
+                </div>
+
+                {/* Key Credential Badges with Staggered Ambient Float */}
+                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                  <span className="skill-pill float-pill-1">🏆 3x Hackathon Placer</span>
+                  <span className="skill-pill float-pill-2">🚀 1,000+ Active Users @ NoteQuest</span>
+                  <span className="skill-pill float-pill-3">🇳🇴 Tenkobo Ambassador (Norway)</span>
+                  <span className="skill-pill float-pill-4">💼 Codveda Technologies Intern</span>
+                </div>
+              </div>
+
+              {/* Right Column: Hero Portrait Frame with Ambient Floating Effect */}
+              <div className="hero-media-side">
+                <div className="hero-portrait-frame floating-hero-frame reveal-on-scroll" style={{ width: '100%', maxWidth: '380px' }}>
+                  <img 
+                    src="/profile.png" 
+                    alt="Praise Adesina" 
+                    style={{ width: '100%', height: 'auto', display: 'block', objectFit: 'cover' }}
+                  />
+                  <div 
+                    style={{
+                      padding: '16px 20px',
+                      backgroundColor: 'var(--color-canvas)',
+                      borderTop: '1px solid var(--color-hairline)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between'
+                    }}
+                  >
+                    <div style={{ textAlign: 'left' }}>
+                      <div style={{ fontSize: '15px', fontWeight: 600, color: 'var(--color-ink)' }}>Praise Adesina</div>
+                      <div style={{ fontSize: '13px', color: 'var(--color-ink-muted-48)' }}>Computer Science Undergraduate</div>
+                    </div>
+                    <span 
+                      style={{ 
+                        fontSize: '12px', 
+                        fontWeight: 600, 
+                        padding: '4px 12px', 
+                        borderRadius: 'var(--rounded-pill)', 
+                        backgroundColor: 'rgba(0, 102, 204, 0.1)', 
+                        color: 'var(--color-primary)' 
+                      }}
+                    >
+                      Open to Roles
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Bento Box Grid */}
-        <div className="bento-grid">
+        {/* ====================================================================
+            TILE 2: Flagship Fintech & Hackathon Showcase (Near-Black Tile 1: #272729)
+            ==================================================================== */}
+        <section id="flagship" className="tile tile-dark">
+          <div className="tile-wide-container">
+            <div className="hero-stack">
+              <span className="eyebrow">
+                International Hackathon Placements
+              </span>
+              <h2 className="display-lg">
+                Engineered for Global Scale.
+              </h2>
+              <p className="lead">
+                From cross-border escrow using the Interledger Protocol (ILP) to pan-African freelance marketplaces powered by Kora API.
+              </p>
 
-          {/* About Me Bento Card (Storytelling Narrative) */}
-          <div className="bento-card col-span-8" id="about">
-            <div className="section-label">About Me</div>
-            <h3 style={{ fontSize: '2rem', fontWeight: 800, marginBottom: '1.25rem', letterSpacing: '-0.03em' }}>
-              Who is Praise?
-            </h3>
-            <p style={{ color: 'var(--text-secondary)', marginBottom: '1rem', fontSize: '1.025rem', lineHeight: '1.65' }}>
-              Praise Adesina is a full-stack engineer and Computer Science student at Covenant University driven by a simple philosophy: software should solve real human problems, gracefully and reliably.
-            </p>
-            <p style={{ color: 'var(--text-secondary)', marginBottom: '1rem', fontSize: '1.025rem', lineHeight: '1.65' }}>
-              From architecting production REST APIs and authentication systems as a Full-Stack Intern at <strong>Codveda Technologies</strong>, to building core features at <strong>NoteQuest</strong> (mynotequest.com) for over 1,000 active beta students, Praise crafts digital experiences across JavaScript, React, Node.js, Express, and PostgreSQL.
-            </p>
-            <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem', fontSize: '1.025rem', lineHeight: '1.65' }}>
-              Fascinated by open financial protocol, he mastered the Interledger Protocol (ILP) & Open Payments SDK, leading to top placements in international hackathons for cross-border payment platforms like <strong>Paylance</strong> and <strong>Afrizend</strong>.
-            </p>
-            
-            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginTop: 'auto' }}>
-              {['JavaScript', 'TypeScript', 'React.js', 'Node.js', 'Express', 'PostgreSQL', 'Interledger SDK', 'Kora API', 'Python', 'C++'].map(skill => (
-                <span key={skill} style={{ padding: '0.35rem 0.85rem', borderRadius: '99px', border: '1px solid var(--border-color)', fontSize: '0.8125rem', fontWeight: 500, background: 'var(--bg-secondary)', color: 'var(--text-secondary)' }}>
-                  {skill}
-                </span>
-              ))}
+              <div className="cta-group">
+                <a href="https://paylance-gmc1.onrender.com" target="_blank" rel="noreferrer" className="btn-primary">
+                  <span>Launch Paylance</span>
+                  <ExternalLink size={15} />
+                </a>
+                <a href="https://afrizend.vercel.app" target="_blank" rel="noreferrer" className="btn-secondary-pill">
+                  <span>Launch Afrizend</span>
+                  <ExternalLink size={15} />
+                </a>
+              </div>
+            </div>
+
+            {/* Flagship Product Showcase Cards */}
+            <div className="flagship-grid">
+              
+              {/* Paylance Card */}
+              <div className="flagship-card reveal-on-scroll">
+                <div className="flagship-badge">
+                  <Trophy size={13} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} />
+                  2nd Place — Interledger Hackathon
+                </div>
+                <h3 style={{ fontSize: '19px', fontWeight: 600, color: '#ffffff', marginBottom: '8px' }}>
+                  Paylance
+                </h3>
+                <div style={{ fontSize: '13px', color: 'var(--color-primary-on-dark)', marginBottom: '14px', fontFamily: 'monospace' }}>
+                  paylance-gmc1.onrender.com
+                </div>
+                <p style={{ color: 'var(--color-body-muted)', fontSize: '14px', lineHeight: '1.5', marginBottom: '18px', flex: 1 }}>
+                  Led a 4-person engineering team architecting a cross-border escrow payment platform utilizing Interledger Open Payments SDK with AI-driven milestone verification.
+                </p>
+                <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginBottom: '20px' }}>
+                  {['React', 'PostgreSQL', 'Node.js', 'ILP SDK'].map(t => (
+                    <span key={t} style={{ fontSize: '12px', padding: '4px 10px', borderRadius: 'var(--rounded-pill)', backgroundColor: 'rgba(255, 255, 255, 0.08)', color: '#ffffff' }}>
+                      {t}
+                    </span>
+                  ))}
+                </div>
+                <a href="https://paylance-gmc1.onrender.com" target="_blank" rel="noreferrer" className="text-link-on-dark">
+                  <span>Experience Paylance Demo</span>
+                  <ChevronRight size={16} />
+                </a>
+              </div>
+
+              {/* Afrizend Card */}
+              <div className="flagship-card reveal-on-scroll">
+                <div className="flagship-badge">
+                  <Award size={13} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} />
+                  3rd Runner-Up — Kora Hackathon 2.0
+                </div>
+                <h3 style={{ fontSize: '19px', fontWeight: 600, color: '#ffffff', marginBottom: '8px' }}>
+                  Afrizend
+                </h3>
+                <div style={{ fontSize: '13px', color: 'var(--color-primary-on-dark)', marginBottom: '14px', fontFamily: 'monospace' }}>
+                  afrizend.vercel.app
+                </div>
+                <p style={{ color: 'var(--color-body-muted)', fontSize: '14px', lineHeight: '1.5', marginBottom: '18px', flex: 1 }}>
+                  Pan-African freelance marketplace powered by the Kora payment gateway API, providing African talent with virtual wallets, automated escrow, and live dynamic currency settlement.
+                </p>
+                <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginBottom: '20px' }}>
+                  {['React', 'Node.js', 'Kora API', 'PostgreSQL'].map(t => (
+                    <span key={t} style={{ fontSize: '12px', padding: '4px 10px', borderRadius: 'var(--rounded-pill)', backgroundColor: 'rgba(255, 255, 255, 0.08)', color: '#ffffff' }}>
+                      {t}
+                    </span>
+                  ))}
+                </div>
+                <a href="https://afrizend.vercel.app" target="_blank" rel="noreferrer" className="text-link-on-dark">
+                  <span>Experience Afrizend Demo</span>
+                  <ChevronRight size={16} />
+                </a>
+              </div>
+
+              {/* NoteQuest Card */}
+              <div className="flagship-card reveal-on-scroll">
+                <div className="flagship-badge">
+                  <Sparkles size={13} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} />
+                  1,000+ Active Beta Users
+                </div>
+                <h3 style={{ fontSize: '19px', fontWeight: 600, color: '#ffffff', marginBottom: '8px' }}>
+                  MyNoteQuest
+                </h3>
+                <div style={{ fontSize: '13px', color: 'var(--color-primary-on-dark)', marginBottom: '14px', fontFamily: 'monospace' }}>
+                  mynotequest.com
+                </div>
+                <p style={{ color: 'var(--color-body-muted)', fontSize: '14px', lineHeight: '1.5', marginBottom: '18px', flex: 1 }}>
+                  AI-driven EdTech platform that converts dense study PDFs into cinematic anime explainers, adaptive recall flashcards, and competitive peer study challenges.
+                </p>
+                <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginBottom: '20px' }}>
+                  {['React', 'Firebase', 'Gemini 3', 'EdTech'].map(t => (
+                    <span key={t} style={{ fontSize: '12px', padding: '4px 10px', borderRadius: 'var(--rounded-pill)', backgroundColor: 'rgba(255, 255, 255, 0.08)', color: '#ffffff' }}>
+                      {t}
+                    </span>
+                  ))}
+                </div>
+                <a href="https://mynotequest.com" target="_blank" rel="noreferrer" className="text-link-on-dark">
+                  <span>Visit MyNoteQuest</span>
+                  <ChevronRight size={16} />
+                </a>
+              </div>
+
             </div>
           </div>
+        </section>
 
-          {/* Profile Analytics Spotlight Card */}
-          <div className="bento-card col-span-4" id="analytics" style={{ background: 'var(--bg-card)', position: 'relative' }}>
-            <div className="section-label"><TrendingUp size={14} /> Profile Spotlight</div>
-            <h3 style={{ fontSize: '1.35rem', fontWeight: 700, marginBottom: '1.25rem' }}>Engagement Metrics</h3>
-            
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1.5rem' }}>
-              <div style={{ padding: '1rem', background: 'var(--bg-secondary)', borderRadius: '1rem', border: '1px solid var(--border-color)' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--text-secondary)', fontSize: '0.8rem', marginBottom: '0.25rem' }}>
-                  <Eye size={14} /> Views
-                </div>
-                <div style={{ fontSize: '1.5rem', fontWeight: 800 }}>238+</div>
-                <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Profile views</div>
+        {/* ====================================================================
+            TILE 3: The Complete Projects Catalog (Light Canvas: #ffffff)
+            ==================================================================== */}
+        <section id="projects" className="tile tile-light">
+          <div className="tile-wide-container">
+            <div className="hero-stack">
+              <span className="eyebrow">
+                Software Portfolio
+              </span>
+              <h2 className="display-lg">
+                Projects Catalog.
+              </h2>
+              <p className="lead">
+                A collection of 10 production web applications, open protocols, and developer systems.
+              </p>
+
+              {/* Search Pill Input */}
+              <div style={{ width: '100%', maxWidth: '440px', marginBottom: '24px', position: 'relative' }}>
+                <input 
+                  type="text" 
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search by title, technology, or keywords..."
+                  className="search-input-pill"
+                  aria-label="Search projects"
+                />
               </div>
 
-              <div style={{ padding: '1rem', background: 'var(--bg-secondary)', borderRadius: '1rem', border: '1px solid var(--border-color)' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--text-secondary)', fontSize: '0.8rem', marginBottom: '0.25rem' }}>
-                  <TrendingUp size={14} /> Impressions
-                </div>
-                <div style={{ fontSize: '1.5rem', fontWeight: 800 }}>205+</div>
-                <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Post engagements</div>
-              </div>
-
-              <div style={{ padding: '1rem', background: 'var(--bg-secondary)', borderRadius: '1rem', border: '1px solid var(--border-color)' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--text-secondary)', fontSize: '0.8rem', marginBottom: '0.25rem' }}>
-                  <Search size={14} /> Searches
-                </div>
-                <div style={{ fontSize: '1.5rem', fontWeight: 800 }}>101+</div>
-                <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Search appearances</div>
-              </div>
-
-              <div style={{ padding: '1rem', background: 'var(--bg-secondary)', borderRadius: '1rem', border: '1px solid var(--border-color)' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--text-secondary)', fontSize: '0.8rem', marginBottom: '0.25rem' }}>
-                  <Users size={14} /> Network
-                </div>
-                <div style={{ fontSize: '1.5rem', fontWeight: 800 }}>2,656+</div>
-                <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Followers</div>
-              </div>
-            </div>
-
-            <div style={{ marginTop: 'auto', paddingTop: '0.5rem', borderTop: '1px solid var(--border-color)', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
-              Open to full-stack, software engineering & fintech internships.
-            </div>
-          </div>
-
-          {/* Featured Stories & Highlights Bento */}
-          <div className="bento-card col-span-12" id="highlights">
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '1rem' }}>
-              <div>
-                <div className="section-label"><Trophy size={14} /> Highlights & Milestones</div>
-                <h3 style={{ fontSize: '1.75rem', fontWeight: 800, letterSpacing: '-0.03em' }}>Featured Stories & Placements</h3>
-              </div>
-              <span style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>3x Hackathon Placer • Leadership • Global Impact</span>
-            </div>
-
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem' }}>
-              <div style={{ padding: '1.25rem', borderRadius: '1rem', background: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent-primary)', fontWeight: 700, fontSize: '0.95rem', marginBottom: '0.5rem' }}>
-                  <Trophy size={18} /> 2nd Place — Interledger Hackathon
-                </div>
-                <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: '1.5' }}>
-                  Led a 4-person team building <strong>Paylance</strong>, a cross-border escrow payment platform using AI milestone verification & Interledger Open Payments SDK.
-                </p>
-              </div>
-
-              <div style={{ padding: '1.25rem', borderRadius: '1rem', background: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent-primary)', fontWeight: 700, fontSize: '0.95rem', marginBottom: '0.5rem' }}>
-                  <Award size={18} /> 3rd Runner-Up — Kora Hackathon 2.0
-                </div>
-                <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: '1.5' }}>
-                  Built <strong>Afrizend</strong>, a pan-African freelance marketplace on Kora API with virtual wallets and dynamic currency conversion.
-                </p>
-              </div>
-
-              <div style={{ padding: '1.25rem', borderRadius: '1rem', background: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent-primary)', fontWeight: 700, fontSize: '0.95rem', marginBottom: '0.5rem' }}>
-                  <Briefcase size={18} /> Norway Remote Opportunity
-                </div>
-                <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: '1.5' }}>
-                  Landed campus ambassador role via LinkedIn representing <strong>Tenkobo</strong> by Kronerland AS (Norway) at Covenant University.
-                </p>
-              </div>
-
-              <div style={{ padding: '1.25rem', borderRadius: '1rem', background: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent-primary)', fontWeight: 700, fontSize: '0.95rem', marginBottom: '0.5rem' }}>
-                  <Users size={18} /> Cowrywise Campus Ambassador
-                </div>
-                <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: '1.5' }}>
-                  Selected from 480+ schools nationally to represent Cowrywise on campus, connecting university students with digital financial tools.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Projects Section */}
-          <div className="bento-card col-span-12" id="projects">
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '1rem' }}>
-              <div>
-                <div className="section-label"><Code2 size={14} /> Portfolio</div>
-                <h3 style={{ fontSize: '1.75rem', fontWeight: 800, letterSpacing: '-0.03em' }}>Featured Projects (10)</h3>
-              </div>
-
-              {/* Filter Tabs */}
-              <div className="filter-tabs" style={{ marginBottom: 0 }}>
+              {/* Category Filter Chips */}
+              <div className="filter-chips-row">
                 {[
-                  { id: 'all', label: 'All (10)' },
+                  { id: 'all', label: 'All Projects (10)' },
                   { id: 'fintech', label: 'Fintech & ILP' },
                   { id: 'edtech', label: 'EdTech & AI' },
                   { id: 'fullstack', label: 'Full-Stack' },
-                  { id: 'web', label: 'Web Apps' }
-                ].map(tab => (
-                  <button 
-                    key={tab.id}
-                    className={`filter-tab ${activeFilter === tab.id ? 'active' : ''}`}
-                    onClick={() => setActiveFilter(tab.id)}
+                  { id: 'web', label: 'Web Applications' }
+                ].map(chip => (
+                  <button
+                    key={chip.id}
+                    type="button"
+                    onClick={() => setActiveFilter(chip.id)}
+                    className={`filter-chip ${activeFilter === chip.id ? 'active' : ''}`}
                   >
-                    {tab.label}
+                    {chip.label}
                   </button>
                 ))}
               </div>
             </div>
 
-            <div style={{ display: 'grid', gap: '1.5rem', gridTemplateColumns: 'repeat(auto-fit, minmax(310px, 1fr))' }}>
+            {/* Store Utility Card Grid */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '24px' }}>
               {filteredProjects.map(proj => (
-                <div 
-                  key={proj.id} 
-                  style={{ 
-                    overflow: 'hidden', border: '1px solid var(--border-color)', 
-                    borderRadius: '1.25rem', background: 'var(--bg-secondary)', 
-                    display: 'flex', flexDirection: 'column', transition: 'all 0.3s ease' 
-                  }} 
-                  className="project-card-mini"
-                >
-                  <div style={{ height: '190px', width: '100%', overflow: 'hidden', borderBottom: '1px solid var(--border-color)', position: 'relative' }}>
-                    <img src={proj.img} alt={proj.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                    <span style={{ position: 'absolute', top: '0.75rem', right: '0.75rem', background: 'rgba(0,0,0,0.75)', color: '#fff', fontSize: '0.7rem', padding: '0.2rem 0.55rem', borderRadius: '99px', backdropFilter: 'blur(4px)' }}>
-                      {proj.category.toUpperCase()}
+                <div key={proj.id} className="store-utility-card reveal-on-scroll">
+                  <div className="store-card-image-wrap">
+                    <img 
+                      src={proj.img} 
+                      alt={proj.title} 
+                      loading="lazy"
+                    />
+                    <span 
+                      style={{ 
+                        position: 'absolute', 
+                        top: '12px', 
+                        right: '12px', 
+                        backgroundColor: 'rgba(29, 29, 31, 0.85)', 
+                        color: '#ffffff', 
+                        fontSize: '11px', 
+                        fontWeight: 600, 
+                        padding: '3px 8px', 
+                        borderRadius: 'var(--rounded-pill)',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.04em'
+                      }}
+                    >
+                      {proj.category}
                     </span>
                   </div>
 
-                  <div style={{ padding: '1.35rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
-                      <h4 style={{ fontSize: '1.3rem', fontWeight: 700, letterSpacing: '-0.02em' }}>{proj.title}</h4>
-                      {proj.link !== '#' && (
-                        <a href={proj.link} target="_blank" rel="noreferrer" style={{ color: 'var(--accent-primary)', textDecoration: 'none' }} title="Visit Demo">
-                          <ExternalLink size={18} />
-                        </a>
-                      )}
-                    </div>
-                    
-                    <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontFamily: 'monospace', marginBottom: '0.75rem' }}>{proj.subtitle}</div>
-                    <p style={{ color: 'var(--text-secondary)', marginBottom: '1.25rem', fontSize: '0.925rem', flex: 1, lineHeight: '1.55' }}>{proj.desc}</p>
-                    
-                    <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
-                      {proj.tags.map(t => (
-                        <span key={t} style={{ fontSize: '0.75rem', padding: '0.2rem 0.55rem', background: 'var(--bg-card)', borderRadius: '6px', border: '1px solid var(--border-color)', color: 'var(--text-secondary)' }}>{t}</span>
-                      ))}
-                    </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '6px' }}>
+                    <h4 className="body-strong" style={{ fontSize: '16px' }}>{proj.title}</h4>
+                    {proj.link !== '#' && (
+                      <a href={proj.link} target="_blank" rel="noreferrer" className="text-link" aria-label={`Open demo for ${proj.title}`}>
+                        <ExternalLink size={15} />
+                      </a>
+                    )}
+                  </div>
+
+                  <div style={{ fontSize: '13px', color: 'var(--color-ink-muted-48)', fontFamily: 'monospace', marginBottom: '10px' }}>
+                    {proj.subtitle}
+                  </div>
+
+                  <p className="body-default" style={{ fontSize: '14px', color: 'var(--color-ink-muted-80)', marginBottom: '16px', flex: 1, lineHeight: '1.5' }}>
+                    {proj.desc}
+                  </p>
+
+                  <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginBottom: '16px' }}>
+                    {proj.tags.map(t => (
+                      <span key={t} style={{ fontSize: '12px', padding: '3px 8px', borderRadius: 'var(--rounded-sm)', backgroundColor: 'var(--color-canvas-parchment)', color: 'var(--color-ink)', border: '1px solid var(--color-divider-soft)' }}>
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div style={{ paddingTop: '12px', borderTop: '1px solid var(--color-hairline)' }}>
+                    <a href={proj.link} target="_blank" rel="noreferrer" className="text-link" style={{ fontSize: '14px', fontWeight: 500 }}>
+                      <span>Visit Live Deployment</span>
+                      <ChevronRight size={14} />
+                    </a>
                   </div>
                 </div>
               ))}
             </div>
           </div>
+        </section>
 
-          {/* Experience Timeline */}
-          <div className="bento-card col-span-12" id="experience">
-            <div className="section-label"><Briefcase size={14} /> Career & Leadership</div>
-            <h3 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '2rem', letterSpacing: '-0.03em' }}>Experience Journey</h3>
+        {/* ====================================================================
+            TILE 4: Career Experience & Leadership (Near-Black Tile 2: #2a2a2c)
+            ==================================================================== */}
+        <section id="experience" className="tile tile-dark-2">
+          <div className="tile-container">
+            <div className="hero-stack">
+              <span className="eyebrow">
+                <Briefcase size={13} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} />
+                Career & Leadership
+              </span>
+              <h2 className="display-lg">
+                The Experience Journey.
+              </h2>
+              <p className="lead" style={{ color: '#f5f5f7' }}>
+                Shipping real-world production code, scaling student platforms, and representing premier tech organizations.
+              </p>
+            </div>
 
-            <div className="timeline-list">
-              <div className="timeline-item">
-                <div style={{ color: 'var(--accent-primary)', fontSize: '0.85rem', fontFamily: 'monospace', fontWeight: 600 }}>May 2026 - Present</div>
-                <h4 style={{ fontSize: '1.2rem', fontWeight: 700, marginTop: '0.25rem' }}>Full-Stack Development Intern</h4>
-                <div style={{ color: 'var(--text-secondary)', fontWeight: 500, fontSize: '0.95rem' }}>Codveda Technologies • Remote / Lagos</div>
-                <p style={{ color: 'var(--text-secondary)', marginTop: '0.5rem', fontSize: '0.95rem', lineHeight: '1.5' }}>
-                  Shipped full-stack web applications across three escalating project levels using React, Node.js, Express, and PostgreSQL. Built authentication flows, database schemas, REST APIs, and real-time Socket.io features.
+            {/* Experience List Stack */}
+            <div className="experience-list">
+              
+              <div className="experience-item reveal-on-scroll">
+                <div className="experience-date">May 2026 – Present</div>
+                <h3 style={{ fontSize: '17px', fontWeight: 600, color: '#ffffff', marginBottom: '4px' }}>
+                  Full-Stack Development Intern
+                </h3>
+                <div style={{ fontSize: '13px', color: 'var(--color-body-muted)', marginBottom: '8px' }}>
+                  Codveda Technologies • Remote / Lagos, Nigeria
+                </div>
+                <p style={{ fontSize: '14px', color: 'var(--color-body-muted)', lineHeight: '1.5' }}>
+                  Architecting full-stack web applications across multiple production modules utilizing React, Node.js, Express, and PostgreSQL. Designed robust relational schemas, authentication gateways, and real-time Socket.io channels.
                 </p>
               </div>
 
-              <div className="timeline-item">
-                <div style={{ color: 'var(--accent-primary)', fontSize: '0.85rem', fontFamily: 'monospace', fontWeight: 600 }}>Dec 2025 - Present</div>
-                <h4 style={{ fontSize: '1.2rem', fontWeight: 700, marginTop: '0.25rem' }}>Product Developer</h4>
-                <div style={{ color: 'var(--text-secondary)', fontWeight: 500, fontSize: '0.95rem' }}>NoteQuest (mynotequest.com) • EdTech Platform</div>
-                <p style={{ color: 'var(--text-secondary)', marginTop: '0.5rem', fontSize: '0.95rem', lineHeight: '1.5' }}>
-                  Driving feature development for a student-first EdTech platform serving 1,000+ active beta users. Analyzing user feedback with the engineering team to improve retention, flashcard recall, and study battle features.
+              <div className="experience-item reveal-on-scroll">
+                <div className="experience-date">Dec 2025 – Present</div>
+                <h3 style={{ fontSize: '17px', fontWeight: 600, color: '#ffffff', marginBottom: '4px' }}>
+                  Product Developer
+                </h3>
+                <div style={{ fontSize: '13px', color: 'var(--color-body-muted)', marginBottom: '8px' }}>
+                  NoteQuest (mynotequest.com) • EdTech Platform
+                </div>
+                <p style={{ fontSize: '14px', color: 'var(--color-body-muted)', lineHeight: '1.5' }}>
+                  Directing feature development for a platform with over 1,000 active beta student users. Collaborating with cross-functional engineers to optimize user retention, AI flashcard synthesis, and competitive study mechanics.
                 </p>
               </div>
 
-              <div className="timeline-item">
-                <div style={{ color: 'var(--accent-primary)', fontSize: '0.85rem', fontFamily: 'monospace', fontWeight: 600 }}>Mar 2026 - Present</div>
-                <h4 style={{ fontSize: '1.2rem', fontWeight: 700, marginTop: '0.25rem' }}>Campus Ambassador (Tenkobo)</h4>
-                <div style={{ color: 'var(--text-secondary)', fontWeight: 500, fontSize: '0.95rem' }}>Kronerland AS (Norway) • Covenant University</div>
-                <p style={{ color: 'var(--text-secondary)', marginTop: '0.5rem', fontSize: '0.95rem', lineHeight: '1.5' }}>
-                  Represent Tenkobo, an academic and career-development platform. Drive user growth and brand presence on campus as part of an inter-school ambassador competition.
+              <div className="experience-item reveal-on-scroll">
+                <div className="experience-date">Mar 2026 – Present</div>
+                <h3 style={{ fontSize: '17px', fontWeight: 600, color: '#ffffff', marginBottom: '4px' }}>
+                  Campus Ambassador (Tenkobo)
+                </h3>
+                <div style={{ fontSize: '13px', color: 'var(--color-body-muted)', marginBottom: '8px' }}>
+                  Kronerland AS (Norway) • Covenant University
+                </div>
+                <p style={{ fontSize: '14px', color: 'var(--color-body-muted)', lineHeight: '1.5' }}>
+                  Landed Norwegian campus ambassador appointment to represent Tenkobo on campus, accelerating user growth and digital community engagement.
                 </p>
               </div>
 
-              <div className="timeline-item">
-                <div style={{ color: 'var(--accent-primary)', fontSize: '0.85rem', fontFamily: 'monospace', fontWeight: 600 }}>Dec 2025 - Present</div>
-                <h4 style={{ fontSize: '1.2rem', fontWeight: 700, marginTop: '0.25rem' }}>Campus Ambassador (Cowrywise)</h4>
-                <div style={{ color: 'var(--text-secondary)', fontWeight: 500, fontSize: '0.95rem' }}>Cowrywise Financial Technology</div>
-                <p style={{ color: 'var(--text-secondary)', marginTop: '0.5rem', fontSize: '0.95rem', lineHeight: '1.5' }}>
-                  Selected from 480+ schools nationally to represent Cowrywise on campus. Spread financial education and connect university students with digital savings resources.
+              <div className="experience-item reveal-on-scroll">
+                <div className="experience-date">Dec 2025 – Present</div>
+                <h3 style={{ fontSize: '17px', fontWeight: 600, color: '#ffffff', marginBottom: '4px' }}>
+                  Campus Ambassador (Cowrywise)
+                </h3>
+                <div style={{ fontSize: '13px', color: 'var(--color-body-muted)', marginBottom: '8px' }}>
+                  Cowrywise Financial Technology
+                </div>
+                <p style={{ fontSize: '14px', color: 'var(--color-body-muted)', lineHeight: '1.5' }}>
+                  Selected from 480+ educational institutions nationwide to represent Cowrywise, advancing financial literacy and connecting student peers to automated wealth management tools.
                 </p>
               </div>
 
-              <div className="timeline-item">
-                <div style={{ color: 'var(--accent-primary)', fontSize: '0.85rem', fontFamily: 'monospace', fontWeight: 600 }}>Apr 2026 - Present</div>
-                <h4 style={{ fontSize: '1.2rem', fontWeight: 700, marginTop: '0.25rem' }}>Open Payments Trainee & Presenter</h4>
-                <div style={{ color: 'var(--text-secondary)', fontWeight: 500, fontSize: '0.95rem' }}>Interledger Foundation NextGen Program</div>
-                <p style={{ color: 'var(--text-secondary)', marginTop: '0.5rem', fontSize: '0.95rem', lineHeight: '1.5' }}>
-                  Trained on Interledger Protocol (ILP) and Open Payments SDK. Presented technical proposals on multi-asset wallet addresses to 200+ attendees on an international community call.
+              <div className="experience-item reveal-on-scroll">
+                <div className="experience-date">Apr 2026 – Present</div>
+                <h3 style={{ fontSize: '17px', fontWeight: 600, color: '#ffffff', marginBottom: '4px' }}>
+                  Open Payments Trainee & Presenter
+                </h3>
+                <div style={{ fontSize: '13px', color: 'var(--color-body-muted)', marginBottom: '8px' }}>
+                  Interledger Foundation NextGen Program
+                </div>
+                <p style={{ fontSize: '14px', color: 'var(--color-body-muted)', lineHeight: '1.5' }}>
+                  Specialized in Interledger Protocol (ILP) and Open Payments SDK. Formulated and delivered technical proposals on multi-asset wallet structures to over 200 international developers.
                 </p>
               </div>
+
             </div>
           </div>
+        </section>
 
-          {/* Education & Certifications */}
-          <div className="bento-card col-span-8" id="education">
-            <div className="section-label"><GraduationCap size={14} /> Academic Record</div>
-            <h3 style={{ fontSize: '1.65rem', fontWeight: 800, marginBottom: '1.5rem', letterSpacing: '-0.03em' }}>Education & Qualifications</h3>
+        {/* ====================================================================
+            TILE 5: Academic Record & Technical Stack (Parchment Tile: #f5f5f7)
+            ==================================================================== */}
+        <section id="academics" className="tile tile-parchment">
+          <div className="tile-wide-container">
+            <div className="hero-stack">
+              <span className="eyebrow">
+                <GraduationCap size={13} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} />
+                Academic Excellence & Technical Matrix
+              </span>
+              <h2 className="display-lg">
+                Foundation & Capabilities.
+              </h2>
+              <p className="lead">
+                Rooted in rigorous computer science fundamentals, complemented by 47 verified tools and frameworks.
+              </p>
+            </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-              <div style={{ padding: '1.25rem', background: 'var(--bg-secondary)', borderRadius: '1rem', border: '1px solid var(--border-color)' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap' }}>
-                  <div>
-                    <h4 style={{ fontSize: '1.25rem', fontWeight: 700 }}>Covenant University</h4>
-                    <div style={{ color: 'var(--accent-primary)', fontWeight: 600, fontSize: '0.95rem' }}>Bachelor of Science (B.Sc.), Computer Science</div>
+            {/* University Record Card */}
+            <div 
+              className="reveal-on-scroll"
+              style={{ 
+                backgroundColor: 'var(--color-canvas)', 
+                border: '1px solid var(--color-hairline)', 
+                borderRadius: 'var(--rounded-lg)', 
+                padding: '32px',
+                marginBottom: '32px'
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '8px', marginBottom: '10px' }}>
+                <div>
+                  <h3 style={{ fontSize: '18px', fontWeight: 600, color: 'var(--color-ink)' }}>Covenant University</h3>
+                  <div style={{ fontSize: '14px', color: 'var(--color-primary)', fontWeight: 500 }}>
+                    Bachelor of Science (B.Sc.), Computer Science
                   </div>
-                  <span style={{ fontSize: '0.85rem', fontFamily: 'monospace', color: 'var(--text-muted)' }}>Oct 2024 – Oct 2028</span>
                 </div>
-                <div style={{ marginTop: '0.5rem', fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-                  Coursework: Data Structures & Algorithms, DBMS (PostgreSQL), Software Engineering, Computer Networks, Systems Analysis & Design, Internet Programming, Discrete Structures.
-                </div>
+                <span style={{ fontSize: '13px', fontFamily: 'monospace', color: 'var(--color-ink-muted-48)' }}>
+                  Oct 2024 – Oct 2028
+                </span>
               </div>
+              <p style={{ fontSize: '14px', color: 'var(--color-ink-muted-80)', lineHeight: '1.5' }}>
+                <strong>Rigorous Coursework:</strong> Data Structures & Algorithms, Database Management Systems (PostgreSQL), Software Engineering, Computer Networks, Systems Analysis & Design, Discrete Mathematics, Object-Oriented Programming.
+              </p>
             </div>
-          </div>
 
-          {/* Certifications & Volunteering Bento */}
-          <div className="bento-card col-span-4" id="certifications">
-            <div className="section-label"><Award size={14} /> Certifications</div>
-            <h3 style={{ fontSize: '1.35rem', fontWeight: 700, marginBottom: '1.25rem' }}>Licenses & Volunteer</h3>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              <div style={{ padding: '1rem', background: 'var(--bg-secondary)', borderRadius: '0.85rem', border: '1px solid var(--border-color)' }}>
-                <div style={{ fontWeight: 700, fontSize: '0.95rem' }}>Microsoft Office Specialist</div>
-                <div style={{ fontSize: '0.85rem', color: 'var(--accent-primary)', fontWeight: 600 }}>Word Associate (Office 2019)</div>
-                <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>Issued Apr 2025 • Microsoft</div>
-              </div>
-
-              <div style={{ padding: '1rem', background: 'var(--bg-secondary)', borderRadius: '0.85rem', border: '1px solid var(--border-color)' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontWeight: 700, fontSize: '0.95rem' }}>
-                  <HeartHandshake size={16} /> Beyond Books Africa
+            {/* Skills Matrix in 4 Clean Cards */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '24px', marginBottom: '32px' }}>
+              
+              <div className="skills-category-card reveal-on-scroll">
+                <div style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-primary)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '12px' }}>
+                  Core Languages
                 </div>
-                <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>Organizing Team Member (Sep 2025)</div>
-                <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>Logistics, liaison & award presentations</div>
-              </div>
-
-              <div style={{ padding: '1rem', background: 'var(--bg-secondary)', borderRadius: '0.85rem', border: '1px solid var(--border-color)' }}>
-                <div style={{ fontWeight: 700, fontSize: '0.95rem' }}>Young and Excellent Club</div>
-                <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>Event Co-Host (Sep 2025)</div>
-                <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>Ogbomosho Secondary Schools Conference</div>
-              </div>
-            </div>
-          </div>
-
-          {/* Technical Skills Bento */}
-          <div className="bento-card col-span-12" id="skills">
-            <div className="section-label"><Code2 size={14} /> Skills Matrix</div>
-            <h3 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '1.5rem', letterSpacing: '-0.03em' }}>Technical Stack (47 Skills)</h3>
-            
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.5rem' }}>
-              <div>
-                <div style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--accent-primary)', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Core Languages</div>
-                <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
+                <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
                   {['JavaScript (ES6+)', 'TypeScript', 'Python', 'C++', 'C', 'Java', 'HTML5', 'CSS3'].map(s => (
-                    <span key={s} style={{ padding: '0.3rem 0.75rem', borderRadius: '99px', border: '1px solid var(--border-color)', fontSize: '0.8rem', background: 'var(--bg-secondary)', fontWeight: 500 }}>{s}</span>
+                    <span key={s} className="skill-pill">{s}</span>
                   ))}
                 </div>
               </div>
 
-              <div>
-                <div style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--accent-primary)', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Frontend & Web</div>
-                <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
-                  {['React.js', 'Next.js', 'Vite', 'Redux/Zustand', 'Tailwind CSS', 'Glassmorphism', 'MDX'].map(s => (
-                    <span key={s} style={{ padding: '0.3rem 0.75rem', borderRadius: '99px', border: '1px solid var(--border-color)', fontSize: '0.8rem', background: 'var(--bg-secondary)', fontWeight: 500 }}>{s}</span>
+              <div className="skills-category-card reveal-on-scroll">
+                <div style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-primary)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '12px' }}>
+                  Frontend Engineering
+                </div>
+                <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+                  {['React.js', 'Next.js', 'Vite', 'Redux / Zustand', 'Tailwind CSS', 'Glassmorphism', 'MDX'].map(s => (
+                    <span key={s} className="skill-pill">{s}</span>
                   ))}
                 </div>
               </div>
 
-              <div>
-                <div style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--accent-primary)', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Backend & Database</div>
-                <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
+              <div className="skills-category-card reveal-on-scroll">
+                <div style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-primary)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '12px' }}>
+                  Backend & Database
+                </div>
+                <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
                   {['Node.js', 'Express.js', 'PostgreSQL', 'Prisma ORM', 'JWT Auth', 'REST APIs', 'GraphQL', 'Socket.io', 'Firebase'].map(s => (
-                    <span key={s} style={{ padding: '0.3rem 0.75rem', borderRadius: '99px', border: '1px solid var(--border-color)', fontSize: '0.8rem', background: 'var(--bg-secondary)', fontWeight: 500 }}>{s}</span>
+                    <span key={s} className="skill-pill">{s}</span>
                   ))}
                 </div>
               </div>
 
-              <div>
-                <div style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--accent-primary)', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Fintech & Protocol</div>
-                <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
+              <div className="skills-category-card reveal-on-scroll">
+                <div style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-primary)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '12px' }}>
+                  Fintech & Open Protocol
+                </div>
+                <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
                   {['Interledger Protocol (ILP)', 'Open Payments SDK', 'Kora API', 'Virtual Wallets', 'Micropayments'].map(s => (
-                    <span key={s} style={{ padding: '0.3rem 0.75rem', borderRadius: '99px', border: '1px solid var(--border-color)', fontSize: '0.8rem', background: 'var(--bg-secondary)', fontWeight: 500 }}>{s}</span>
+                    <span key={s} className="skill-pill">{s}</span>
                   ))}
                 </div>
+              </div>
+
+            </div>
+
+            {/* Certifications & Volunteering */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
+              <div className="reveal-on-scroll" style={{ padding: '20px', borderRadius: 'var(--rounded-lg)', backgroundColor: 'var(--color-canvas)', border: '1px solid var(--color-hairline)' }}>
+                <div style={{ fontSize: '15px', fontWeight: 600 }}>Microsoft Office Specialist</div>
+                <div style={{ fontSize: '14px', color: 'var(--color-primary)' }}>Word Associate (Office 2019)</div>
+                <div style={{ fontSize: '12px', color: 'var(--color-ink-muted-48)', marginTop: '4px' }}>Issued April 2025 • Microsoft</div>
+              </div>
+
+              <div className="reveal-on-scroll" style={{ padding: '20px', borderRadius: 'var(--rounded-lg)', backgroundColor: 'var(--color-canvas)', border: '1px solid var(--color-hairline)' }}>
+                <div style={{ fontSize: '15px', fontWeight: 600 }}>Beyond Books Africa</div>
+                <div style={{ fontSize: '14px', color: 'var(--color-ink-muted-80)' }}>Organizing Team Member (Sep 2025)</div>
+                <div style={{ fontSize: '12px', color: 'var(--color-ink-muted-48)', marginTop: '4px' }}>Logistics, external liaison, and awards coordination</div>
+              </div>
+
+              <div className="reveal-on-scroll" style={{ padding: '20px', borderRadius: 'var(--rounded-lg)', backgroundColor: 'var(--color-canvas)', border: '1px solid var(--color-hairline)' }}>
+                <div style={{ fontSize: '15px', fontWeight: 600 }}>Young and Excellent Club</div>
+                <div style={{ fontSize: '14px', color: 'var(--color-ink-muted-80)' }}>Event Co-Host (Sep 2025)</div>
+                <div style={{ fontSize: '12px', color: 'var(--color-ink-muted-48)', marginTop: '4px' }}>Ogbomosho Secondary Schools Conference</div>
               </div>
             </div>
+
           </div>
+        </section>
 
-          <Chat />
-          <Contact />
+        {/* ====================================================================
+            TILE 6: Interactive AI Assistant (Light Tile: #ffffff)
+            ==================================================================== */}
+        <section id="chat" className="tile tile-light">
+          <div className="tile-container">
+            <div className="hero-stack" style={{ marginBottom: '32px' }}>
+              <span className="eyebrow">
+                <Sparkles size={13} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} />
+                Natural Language Exploration
+              </span>
+              <h2 className="display-lg">
+                Ask Praise's AI Assistant.
+              </h2>
+              <p className="lead">
+                Have a question about specific projects, hackathons, or technologies? Ask directly.
+              </p>
+            </div>
 
-        </div>
+            <div className="reveal-on-scroll">
+              <Chat />
+            </div>
+          </div>
+        </section>
+
+        {/* ====================================================================
+            TILE 7: Contact & Connect (Parchment Tile: #f5f5f7)
+            ==================================================================== */}
+        <section id="contact" className="tile tile-parchment">
+          <div className="tile-container reveal-on-scroll">
+            <Contact />
+          </div>
+        </section>
       </main>
 
-      {/* Footer */}
-      <footer style={{ borderTop: '1px solid var(--border-color)', padding: '2rem 0', background: 'var(--bg-secondary)', marginTop: '4rem' }}>
-        <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
-          <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
-            © {new Date().getFullYear()} Praise (Adewale) Adesina. All rights reserved. • Covenant University CS
+      {/* ====================================================================
+          8. Apple Editorial Multi-Column Footer
+          ==================================================================== */}
+      <footer className="apple-footer" role="contentinfo">
+        <div className="apple-footer-container">
+          <div className="apple-footer-grid">
+            
+            <div className="apple-footer-col">
+              <h4>Featured Platforms</h4>
+              <ul>
+                <li><a href="https://paylance-gmc1.onrender.com" target="_blank" rel="noreferrer">Paylance Escrow</a></li>
+                <li><a href="https://afrizend.vercel.app" target="_blank" rel="noreferrer">Afrizend Marketplace</a></li>
+                <li><a href="https://mynotequest.com" target="_blank" rel="noreferrer">MyNoteQuest EdTech</a></li>
+                <li><a href="https://oyaspray.vercel.app" target="_blank" rel="noreferrer">OyaSpray Micropayments</a></li>
+                <li><a href="https://webphinix.vercel.app" target="_blank" rel="noreferrer">Webphinix Business</a></li>
+              </ul>
+            </div>
+
+            <div className="apple-footer-col">
+              <h4>Experience</h4>
+              <ul>
+                <li><a href="#experience" onClick={(e) => smoothScrollTo(e, '#experience')}>Codveda Technologies</a></li>
+                <li><a href="#experience" onClick={(e) => smoothScrollTo(e, '#experience')}>NoteQuest Platform</a></li>
+                <li><a href="#experience" onClick={(e) => smoothScrollTo(e, '#experience')}>Tenkobo Ambassador (Norway)</a></li>
+                <li><a href="#experience" onClick={(e) => smoothScrollTo(e, '#experience')}>Cowrywise Ambassador</a></li>
+                <li><a href="#experience" onClick={(e) => smoothScrollTo(e, '#experience')}>Interledger NextGen</a></li>
+              </ul>
+            </div>
+
+            <div className="apple-footer-col">
+              <h4>Academics & Stack</h4>
+              <ul>
+                <li><a href="#academics" onClick={(e) => smoothScrollTo(e, '#academics')}>Covenant University CS</a></li>
+                <li><a href="#academics" onClick={(e) => smoothScrollTo(e, '#academics')}>Open Payments & ILP</a></li>
+                <li><a href="#academics" onClick={(e) => smoothScrollTo(e, '#academics')}>Full-Stack Architecture</a></li>
+                <li><a href="#academics" onClick={(e) => smoothScrollTo(e, '#academics')}>Relational Systems & APIs</a></li>
+                <li><a href="#academics" onClick={(e) => smoothScrollTo(e, '#academics')}>Certifications</a></li>
+              </ul>
+            </div>
+
+            <div className="apple-footer-col">
+              <h4>Connect</h4>
+              <ul>
+                <li><a href="https://www.linkedin.com/in/praise-adesina-bb5905248" target="_blank" rel="noreferrer">LinkedIn</a></li>
+                <li><a href="https://github.com/praiseadesina2-stack" target="_blank" rel="noreferrer">GitHub</a></li>
+                <li><a href="https://x.com/praiseadesina" target="_blank" rel="noreferrer">Twitter / X</a></li>
+                <li><a href="https://wa.me/2347043503721" target="_blank" rel="noreferrer">WhatsApp</a></li>
+                <li><a href="mailto:praiseadesina2@gmail.com">Direct Email</a></li>
+              </ul>
+            </div>
+
           </div>
-          <a href="#about" style={{ color: 'var(--accent-primary)', textDecoration: 'none', fontSize: '0.9rem', fontWeight: 600 }}>
-            Back to top ↑
-          </a>
+
+          <div className="apple-footer-legal">
+            <div>
+              Copyright © {new Date().getFullYear()} Praise Adesina. All rights reserved. • Covenant University CS
+            </div>
+            <div style={{ display: 'flex', gap: '16px' }}>
+              <a href="#hero" onClick={(e) => smoothScrollTo(e, '#hero')}>Back to Top ↑</a>
+            </div>
+          </div>
         </div>
       </footer>
 
       <style>{`
-        .nav-links a:hover { color: var(--text-primary) !important; }
-        .project-card-mini:hover {
-          border-color: var(--accent-primary) !important;
-          transform: translateY(-4px);
-          box-shadow: var(--shadow-lg);
-        }
-        .project-card-mini img {
-          transition: transform 0.4s ease;
-        }
-        .project-card-mini:hover img {
-          transform: scale(1.06);
-        }
-        @media (max-width: 768px) {
-          .nav-links { display: none; }
-          .nav-badge { display: none; }
+        @media (max-width: 834px) {
+          .mobile-menu-btn {
+            display: inline-flex !important;
+          }
         }
       `}</style>
     </div>
@@ -642,4 +1133,3 @@ const App = () => {
 };
 
 export default App;
-
